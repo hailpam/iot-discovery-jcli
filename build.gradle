@@ -49,7 +49,7 @@ task zipJavaDoc(type: Zip, dependsOn :javaDoc) {
 
 dependencies {
     //internal module dependencies
-    compile project (':iot-discovery-services')
+    compile ':iot-discovery-services-1.0'
 
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
     compile 'log4j:log4j:1.2.17'
