@@ -92,8 +92,9 @@ public final class Options {
 				String.format( "  %-40s\t%-40s", "-" + TRUST_ANCHOR_S + ", --" + TRUST_ANCHOR,
 						"specify file containing trust anchor keys [optional]" ) ).append( "\n" );
 		sb.append(
-				String.format( "  %-40s\t%-40s", "--" + TLSA_RECORD,
-						"query for tlsa record certificate data" ) ).append( "\n" );
+				String.format( "  %-40s\t%-40s", "--" + TLSA_RECORD + " PORT:PROTOCOL",
+						"query for tlsa record certificate data [--domain is required, both PORT and PROTOCOL are optional." +
+								" Specify only PROTOCOL using :PROTOCOL. Default values are 0:TCP]" ) ).append( "\n" );
 		sb.append( "\n" );
 
 		return sb.toString();

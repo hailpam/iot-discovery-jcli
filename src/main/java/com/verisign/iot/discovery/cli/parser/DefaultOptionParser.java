@@ -69,7 +69,7 @@ public class DefaultOptionParser implements CommandOptionParser {
 		this.parser.acceptsAll( Arrays.asList( Options.LIST_SERVICES_S, Options.LIST_SERVICES ), "list services" );
 		this.parser.acceptsAll( Arrays.asList( Options.SERVICE_RECORD_S, Options.SERVICE_RECORD ), "get service record" );
 		this.parser.acceptsAll( Arrays.asList( Options.TEXT_RECORD_S, Options.TEXT_RECORD ), "get text record" ).withRequiredArg();
-		this.parser.acceptsAll( Arrays.asList( Options.TLSA_RECORD ), "get tlsa records" ).withRequiredArg();
+		this.parser.acceptsAll( Arrays.asList( Options.TLSA_RECORD ), "get tlsa records" ).withOptionalArg();
 		this.parser
 				.acceptsAll( Arrays.asList( Options.DNS_SEC_STATUS, Options.DNS_SEC_STATUS_S ), "Check DNSSEC status of resolver" )
 				.withOptionalArg()
