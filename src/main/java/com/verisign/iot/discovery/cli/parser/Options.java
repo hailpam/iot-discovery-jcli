@@ -42,8 +42,7 @@ public final class Options {
 	public static final String DNS_SEC_STATUS = "dnssec-status";
 	public static final String DNS_SEC_STATUS_S = "c";
 
-	public static final String GENERIC_RR = "rr-type";
-	public static final String GENERIC_RR_S = "x";
+	public static final String TLSA_RECORD = "tlsa";
 
 	public static final String LONG_OPTION_ERROR = "unrecognized option '--%s'";
 	public static final String SHORT_OPTION_ERROR = "invalid option -- '%s'";
@@ -93,8 +92,8 @@ public final class Options {
 				String.format( "  %-40s\t%-40s", "-" + TRUST_ANCHOR_S + ", --" + TRUST_ANCHOR,
 						"specify file containing trust anchor keys [optional]" ) ).append( "\n" );
 		sb.append(
-				String.format( "  %-40s\t%-40s", "-" + GENERIC_RR_S + ", --" + GENERIC_RR,
-						"query a specific rr type for a given domain" ) ).append( "\n" );
+				String.format( "  %-40s\t%-40s", "--" + TLSA_RECORD,
+						"query for tlsa record certificate data" ) ).append( "\n" );
 		sb.append( "\n" );
 
 		return sb.toString();

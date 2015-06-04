@@ -25,7 +25,7 @@ public class CommandFactory {
 		String[] argsCommandOption =
 				new String[] {
 				Options.LIST_SERVICES, Options.LIST_INSTANCES, Options.SERVICE_RECORD, Options.TEXT_RECORD, Options.DNS_SEC_STATUS,
-				Options.HELP, Options.GENERIC_RR
+				Options.HELP, Options.TLSA_RECORD
 		};
 
 		Command command = null;
@@ -66,8 +66,8 @@ public class CommandFactory {
 		else if ( Options.DNS_SEC_STATUS.equals( commandOption ) ) {
 			return new CheckDnsSecCommand();
 		}
-		else if ( Options.GENERIC_RR.equals( commandOption ) ) {
-			return new GenericRecordCommand();
+		else if ( Options.TLSA_RECORD.equals( commandOption ) ) {
+			return new TLSARecordCommand();
 		}
 		else if ( Options.HELP.equals( commandOption ) ) {
 			return new ShowHelpCommand();

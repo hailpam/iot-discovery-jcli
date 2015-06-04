@@ -69,7 +69,7 @@ public class DefaultOptionParser implements CommandOptionParser {
 		this.parser.acceptsAll( Arrays.asList( Options.LIST_SERVICES_S, Options.LIST_SERVICES ), "list services" );
 		this.parser.acceptsAll( Arrays.asList( Options.SERVICE_RECORD_S, Options.SERVICE_RECORD ), "get service record" );
 		this.parser.acceptsAll( Arrays.asList( Options.TEXT_RECORD_S, Options.TEXT_RECORD ), "get text record" ).withRequiredArg();
-		this.parser.acceptsAll( Arrays.asList( Options.GENERIC_RR_S, Options.GENERIC_RR ), "get records of type" ).withRequiredArg();
+		this.parser.acceptsAll( Arrays.asList( Options.TLSA_RECORD ), "get tlsa records" ).withRequiredArg();
 		this.parser
 				.acceptsAll( Arrays.asList( Options.DNS_SEC_STATUS, Options.DNS_SEC_STATUS_S ), "Check DNSSEC status of resolver" )
 				.withOptionalArg()
@@ -78,7 +78,7 @@ public class DefaultOptionParser implements CommandOptionParser {
 		// Add the options
 		this.parser
 				.acceptsAll( Arrays.asList( Options.DOMAIN_S, Options.DOMAIN ), "domain name to query [required]" )
-				.requiredIf( Options.LIST_INSTANCES, Options.LIST_SERVICES, Options.SERVICE_RECORD, Options.TEXT_RECORD, Options.GENERIC_RR )
+				.requiredIf( Options.LIST_INSTANCES, Options.LIST_SERVICES, Options.SERVICE_RECORD, Options.TEXT_RECORD, Options.TLSA_RECORD )
 				.withRequiredArg()
 				.ofType( String.class );
 		this.parser
