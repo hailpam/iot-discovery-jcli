@@ -33,7 +33,7 @@ public class DefaultOptionParser implements CommandOptionParser {
 			return this.parser.parse( args );
 		}
 		catch ( OptionException e ) {
-			throw new ParsingException( extractUsefullMessage( e ) );
+			throw new ParsingException( extractUsefulMessage( e ) );
 		}
 		catch ( Exception e ) {
 			throw new ParsingException( e );
@@ -42,7 +42,7 @@ public class DefaultOptionParser implements CommandOptionParser {
 
 
 	// This is a workaround for the bad exceptions handling from jopt
-	private String extractUsefullMessage ( OptionException ex ) {
+	private String extractUsefulMessage ( OptionException ex ) {
 
 		String className = ex.getClass().getName();
 

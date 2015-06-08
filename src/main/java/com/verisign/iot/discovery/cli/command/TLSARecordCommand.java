@@ -29,7 +29,7 @@ public class TLSARecordCommand extends DnsSdAbstractCommand {
 		super.initialize( optionSet );
 
 		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
-		this.domain = new Fqdn( "", domainStr );
+		this.domain = new Fqdn( domainStr );
 		this.tlsaPrefix = new TLSAPrefix( OptionUtil.getOptionValue( optionSet, Options.TLSA_RECORD, false ) );
 	}
 
