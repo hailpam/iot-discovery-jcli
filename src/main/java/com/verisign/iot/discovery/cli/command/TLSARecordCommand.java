@@ -3,11 +3,13 @@ package com.verisign.iot.discovery.cli.command;
 import com.verisign.iot.discovery.cli.ConsoleWriter;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
+import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.cli.util.OptionUtil;
 import com.verisign.iot.discovery.domain.Fqdn;
 import com.verisign.iot.discovery.domain.TLSADiscoveryRecord;
 import com.verisign.iot.discovery.domain.TLSAPrefix;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
+import com.verisign.iot.discovery.exceptions.LookupException;
 import java.util.Set;
 import joptsimple.OptionSet;
 
@@ -21,7 +23,8 @@ public class TLSARecordCommand extends DnsSdAbstractCommand {
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException {
+	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+    {
 		super.initialize( optionSet );
 
 		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
@@ -32,10 +35,17 @@ public class TLSARecordCommand extends DnsSdAbstractCommand {
 
 	@Override
 	public void doExecute ( ConsoleWriter consoleWriter )
-                    throws DnsServiceException {
-		Set<TLSADiscoveryRecord> records = this.dnsSd.listTLSARecords( this.domain, this.tlsaPrefix, !this.insecureMode );
-
-		for(TLSADiscoveryRecord record: records){
+                                throws DnsServiceException 
+    {
+        Set<TLSADiscoveryRecord> records = null;
+        try {
+            records = this.dnsSd.listTLSARecords(this.domain, 
+                                                 this.tlsaPrefix, !this.insecureMode );
+        } catch(LookupException le) {
+            throw new DnsServiceException(le.dnsError(), 
+                                        String.format(DisplayUtil.map(le.dnsError()), domain.fqdn()), true);
+        }
+        for(TLSADiscoveryRecord record: records){
 			consoleWriter.log( record.toDisplay() );
 		}
 	}
