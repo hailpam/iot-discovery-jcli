@@ -1,15 +1,17 @@
 
 package com.verisign.iot.discovery.cli.util;
 
-import joptsimple.OptionSet;
-
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
+import joptsimple.OptionSet;
 
 /**
  * @author nbrasey
  * @version 1.0 May 05, 2015
  */
 public final class OptionUtil {
+
+    private static final String checkAddress = "^([0-9]{1,}\\.){0,2}[0-9]{1,}$";
+
 
 	public static String getOptionValue ( OptionSet optionSet, String option, boolean mandatory )
 			throws OptionsNotValidException {
@@ -32,6 +34,11 @@ public final class OptionUtil {
 			return value;
 		}
 	}
+
+    public static boolean checkResolverAddress(String srvAddress)
+    {
+        return srvAddress.matches(checkAddress);
+    }
 
 
 	private OptionUtil () {

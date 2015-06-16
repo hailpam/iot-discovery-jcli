@@ -8,12 +8,8 @@ import com.verisign.iot.discovery.domain.Fqdn;
 import com.verisign.iot.discovery.domain.TLSADiscoveryRecord;
 import com.verisign.iot.discovery.domain.TLSAPrefix;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
-import joptsimple.OptionSet;
-import org.xbill.DNS.*;
-
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
+import joptsimple.OptionSet;
 
 /**
  * Created by tjmurphy on 6/1/15.
@@ -35,7 +31,8 @@ public class TLSARecordCommand extends DnsSdAbstractCommand {
 
 
 	@Override
-	public void doExecute ( ConsoleWriter consoleWriter ) throws DnsServiceException {
+	public void doExecute ( ConsoleWriter consoleWriter )
+                    throws DnsServiceException {
 		Set<TLSADiscoveryRecord> records = this.dnsSd.listTLSARecords( this.domain, this.tlsaPrefix, !this.insecureMode );
 
 		for(TLSADiscoveryRecord record: records){

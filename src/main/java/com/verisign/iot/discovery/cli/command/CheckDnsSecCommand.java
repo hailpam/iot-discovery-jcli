@@ -3,8 +3,8 @@ package com.verisign.iot.discovery.cli.command;
 import com.verisign.iot.discovery.cli.ConsoleWriter;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
+import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.commons.Constants;
-import com.verisign.iot.discovery.commons.StatusCode;
 import com.verisign.iot.discovery.domain.Fqdn;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
 import com.verisign.iot.discovery.exceptions.LookupException;
@@ -30,7 +30,7 @@ public class CheckDnsSecCommand extends DnsSdAbstractCommand {
             domainStr = Constants.DEFAULT_DNSSEC_DOMAIN;
         }
 
-        this.domain = new Fqdn("", domainStr);
+        this.domain = new Fqdn(domainStr);
     }
 
     @Override
@@ -38,16 +38,12 @@ public class CheckDnsSecCommand extends DnsSdAbstractCommand {
 
         try {
             this.dnsSd.isDnsSecValid(this.domain);
-            consoleWriter.log(String.format("DNSSEC status check for domain [%s] successful.", this.domain.domain()));
+            consoleWriter.log(String.format(DisplayUtil.SECURE_DNS_RESPONSE,
+                                            this.domain.domain()));
         } catch (LookupException e) {
-            StatusCode statusCode = e.dnsError();
-
-            if (statusCode == StatusCode.RESOURCE_INSECURE_ERROR) {
-                consoleWriter.log(String.format("Failed DNSSEC validation for domain [%s]", this.domain.domain()));
-            }
-            else {
-                throw e;
-            }
+            throw new DnsServiceException(e.dnsError(),
+                                          String.format(DisplayUtil.map(e.dnsError()), domain.fqdn()),
+                                          true);
         }
     }
 }

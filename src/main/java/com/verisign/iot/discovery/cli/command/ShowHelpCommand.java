@@ -1,12 +1,11 @@
 
 package com.verisign.iot.discovery.cli.command;
 
-import com.verisign.iot.discovery.cli.parser.Options;
-import joptsimple.OptionSet;
-
 import com.verisign.iot.discovery.cli.ConsoleWriter;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
+import com.verisign.iot.discovery.cli.parser.Options;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
+import joptsimple.OptionSet;
 
 /**
  * Created by nbrasey on 5/4/15.
@@ -20,7 +19,8 @@ public class ShowHelpCommand extends DnsSdAbstractCommand {
 
 
 	@Override
-	public void doExecute ( ConsoleWriter consoleWriter ) throws DnsServiceException {
+	public void doExecute ( ConsoleWriter consoleWriter )
+                    throws DnsServiceException {
 		consoleWriter.log( Options.getUsage() );
 	}
 
