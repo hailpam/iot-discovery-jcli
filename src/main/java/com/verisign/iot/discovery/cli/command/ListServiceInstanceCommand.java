@@ -1,4 +1,5 @@
 
+
 package com.verisign.iot.discovery.cli.command;
 
 import com.verisign.iot.discovery.cli.ConsoleWriter;

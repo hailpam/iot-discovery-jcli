@@ -22,12 +22,12 @@ public class Launcher {
 
 		CommandOptionParser parser = new DefaultOptionParser();
 
-//        String test[] = { "-d", "com", "-t", "example"};
+        String test[] = { "--tlsa", "-d", "Devicex.djk6epmd4tlq.1.iotverisign.com", "-e" };
 
 		try {
 			// Parse the arguments
-			OptionSet optionSet = parser.parse( args );
-//            OptionSet optionSet = parser.parse( test );
+//			OptionSet optionSet = parser.parse( args );
+            OptionSet optionSet = parser.parse( test );
 
 			// Build the specific command from the parsed arguments
 			Command command = CommandFactory.buildCommand( optionSet );
