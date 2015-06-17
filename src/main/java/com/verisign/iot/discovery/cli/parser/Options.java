@@ -20,8 +20,8 @@ public final class Options {
     public static final String LIST_SERVICES = "list-services";
     public static final String LIST_SERVICES_S = "l";
 
-    public static final String SERVICE_RECORD = "service-records";
-    public static final String SERVICE_RECORD_S = "r";
+    public static final String SERVICE_RECORDS = "service-records";
+    public static final String SERVICE_RECORDS_S = "r";
 
     public static final String TEXT_RECORD = "text-record";
     public static final String TEXT_RECORD_S = "t";
@@ -47,7 +47,9 @@ public final class Options {
     public static final String LONG_OPTION_ERROR = "unrecognized option '--%s'";
     public static final String SHORT_OPTION_ERROR = "invalid option -- '%s'";
 
-    public static String getUsage() {
+    
+    public static String getUsage() 
+    {
 
         StringBuilder sb = new StringBuilder();
 
@@ -59,7 +61,7 @@ public final class Options {
                                 "Detailed display of service instances; -s and -d are required.")).append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + LIST_SERVICES_S + ", --" + LIST_SERVICES,
                                 "Display the service types; -d is required.")).append("\n");
-        sb.append(String.format("  %-40s\t%-40s", "-" + SERVICE_RECORD_S + ", --" + SERVICE_RECORD, 
+        sb.append(String.format("  %-40s\t%-40s", "-" + SERVICE_RECORDS_S + ", --" + SERVICE_RECORDS, 
                                 "Detailed display of service records; -s and -d are required.")).append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + DNS_SEC_STATUS_S + " [domain], --" + DNS_SEC_STATUS +" [domain]",
                                 "Check the DNSSEC status of 'domain'; if not specified, check against the default one.")).append("\n");
@@ -87,7 +89,8 @@ public final class Options {
 
     }
 
-    private Options() {
+    private Options() 
+    {
         throw new AssertionError(String.format("Class %s not instantiable", this.getClass().getName()));
     }
 }

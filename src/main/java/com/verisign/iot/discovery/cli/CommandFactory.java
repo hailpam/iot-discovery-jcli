@@ -1,10 +1,16 @@
 
 package com.verisign.iot.discovery.cli;
 
-import com.verisign.iot.discovery.cli.command.*;
+import com.verisign.iot.discovery.cli.command.CheckDnsSecCommand;
+import com.verisign.iot.discovery.cli.command.ListServiceInstanceCommand;
+import com.verisign.iot.discovery.cli.command.ListServiceRecordCommand;
+import com.verisign.iot.discovery.cli.command.ListServiceTypesCommand;
+import com.verisign.iot.discovery.cli.command.ListTextRecordCommand;
+import com.verisign.iot.discovery.cli.command.ShowHelpCommand;
+import com.verisign.iot.discovery.cli.command.TLSARecordCommand;
+import com.verisign.iot.discovery.cli.exception.CommandNotFoundException;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
-import com.verisign.iot.discovery.cli.exception.CommandNotFoundException;
 import joptsimple.OptionSet;
 
 /**
@@ -20,12 +26,14 @@ public class CommandFactory {
 	 * @throws CommandNotFoundException
 	 * @throws OptionsNotValidException
 	 */
-	public static Command buildCommand ( OptionSet optionSet ) throws CommandNotFoundException, OptionsNotValidException {
+	public static Command buildCommand ( OptionSet optionSet ) 
+                            throws CommandNotFoundException, OptionsNotValidException 
+    {
 
-		String[] argsCommandOption =
-				new String[] {
-				Options.LIST_SERVICES, Options.LIST_INSTANCES, Options.SERVICE_RECORD, Options.TEXT_RECORD, Options.DNS_SEC_STATUS,
-				Options.HELP, Options.TLSA_RECORD
+		String[] argsCommandOption = new String[] {
+                                        Options.LIST_SERVICES, Options.LIST_INSTANCES, 
+                                        Options.SERVICE_RECORDS, Options.TEXT_RECORD, 
+                                        Options.DNS_SEC_STATUS, Options.HELP, Options.TLSA_RECORD
 		};
 
 		Command command = null;
@@ -57,7 +65,7 @@ public class CommandFactory {
 		else if ( Options.LIST_INSTANCES.equals( commandOption ) ) {
 			return new ListServiceInstanceCommand();
 		}
-		else if ( Options.SERVICE_RECORD.equals( commandOption ) ) {
+		else if ( Options.SERVICE_RECORDS.equals( commandOption ) ) {
 			return new ListServiceRecordCommand();
 		}
 		else if ( Options.TEXT_RECORD.equals( commandOption ) ) {

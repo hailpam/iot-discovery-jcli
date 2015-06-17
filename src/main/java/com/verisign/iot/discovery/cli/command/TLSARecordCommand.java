@@ -16,7 +16,8 @@ import joptsimple.OptionSet;
 /**
  * Created by tjmurphy on 6/1/15.
  */
-public class TLSARecordCommand extends DnsSdAbstractCommand {
+public class TLSARecordCommand extends DnsSdAbstractCommand 
+{
 
 	private Fqdn domain;
 	private TLSAPrefix tlsaPrefix;
@@ -26,11 +27,11 @@ public class TLSARecordCommand extends DnsSdAbstractCommand {
 	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
     {
 		super.initialize( optionSet );
-
-		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
-		this.domain = new Fqdn( domainStr );
+        this.domain = new Fqdn(OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true), 
+                               OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true ));
+        
 		this.tlsaPrefix = new TLSAPrefix( OptionUtil.getOptionValue( optionSet, Options.TLSA_RECORD, false ) );
-	}
+    }
 
 
 	@Override
