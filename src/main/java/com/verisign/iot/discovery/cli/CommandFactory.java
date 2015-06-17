@@ -7,7 +7,7 @@ import com.verisign.iot.discovery.cli.command.ListServiceRecordsCommand;
 import com.verisign.iot.discovery.cli.command.ListServiceTypesCommand;
 import com.verisign.iot.discovery.cli.command.ListTextRecordCommand;
 import com.verisign.iot.discovery.cli.command.ShowHelpCommand;
-import com.verisign.iot.discovery.cli.command.TLSARecordCommand;
+import com.verisign.iot.discovery.cli.command.TLSARecordsCommand;
 import com.verisign.iot.discovery.cli.exception.CommandNotFoundException;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
@@ -96,7 +96,7 @@ public class CommandFactory {
 			return new CheckDnsSecCommand();
 		}
 		else if ( Options.TLSA_RECORD.equals( commandOption ) ) {
-			return new TLSARecordCommand();
+			return new TLSARecordsCommand();
 		}
 		else if ( Options.HELP.equals( commandOption ) ) {
 			return new ShowHelpCommand();

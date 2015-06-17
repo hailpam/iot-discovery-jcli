@@ -10,7 +10,7 @@ import com.verisign.iot.discovery.commons.StatusCode;
  * @version 1.0
  * @since 6/16/15.
  */
-public class DisplayUtil 
+public class DisplayUtil
 {
 
     public static final String UNEXPECTED_ERROR = "Unexpected Error";
@@ -19,14 +19,14 @@ public class DisplayUtil
     public static final String INTERNAL_ERROR = "Inernal Lib Error";
     public static final String UNREACHABLE_DNS = "Unreachable DNS Server or Timeout Expired: [%s]";
     public static final String LOOKUP_ERROR = "Generic Lookup Error: look at the Errors Trace";
-    public static final String INSECURE_DNS_RESPONSE = "DNSSEC Status Check failed for domain: [%s]";
+    public static final String INSECURE_DNS_RESPONSE = "DNSSEC Status Check failed for domain";
     public static final String UNEXPECTED_RR_TYPE = "Unexpected Resource Record Type";
     public static final String DNS_FAILURE = "DNS Server Failure";
     public static final String DNS_NAME_NOT_EXIST = "DNS Name does not exist: [%s]";
     public static final String RR_TYPE_NOT_EXIST = "RR Type does not exist";
     public static final String INVALID_FQDN = "Invalid Fully Qualified Domain Name: [%s]";
 
-    public static final String SECURE_DNS_RESPONSE = "DNSSEC Status Check for domain [%s] successful";
+    public static final String SECURE_DNS_RESPONSE = "DNSSEC Status Check for domain successful";
 
 
     public static String map(StatusCode status)
