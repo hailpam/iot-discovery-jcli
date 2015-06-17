@@ -17,7 +17,7 @@ public class DisplayUtil
     public static final String INVALID_ARGUMENT = "Invalid Argument Usage";
     public static final String INVALID_DNS_HOST = "Invalid DNS Server Host: [%s]";
     public static final String INTERNAL_ERROR = "Inernal Lib Error";
-    public static final String UNREACHABLE_DNS = "Unreachable DNS Server or Timeout Expired: [%s]";
+    public static final String UNREACHABLE_DNS = "Unreachable DNS Server or Timeout Expired";
     public static final String LOOKUP_ERROR = "Generic Lookup Error: look at the Errors Trace";
     public static final String INSECURE_DNS_RESPONSE = "DNSSEC Status Check failed for domain";
     public static final String UNEXPECTED_RR_TYPE = "Unexpected Resource Record Type";
