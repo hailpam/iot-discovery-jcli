@@ -4,9 +4,11 @@ package com.verisign.iot.discovery.cli.command;
 import com.verisign.iot.discovery.cli.ConsoleWriter;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
+import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.cli.util.OptionUtil;
 import com.verisign.iot.discovery.domain.Fqdn;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
+import com.verisign.iot.discovery.exceptions.LookupException;
 import java.util.Set;
 import joptsimple.OptionSet;
 
@@ -30,8 +32,15 @@ public class ListServiceTypesCommand extends DnsSdAbstractCommand {
 	@Override
 	public void doExecute ( ConsoleWriter consoleWriter )
                     throws DnsServiceException {
-		Set<String> serviceTypes = this.dnsSd.listServiceTypes( this.domain, !super.insecureMode );
-		for ( String serviceType : serviceTypes ) {
+		Set<String> serviceTypes = null;
+        try {
+            serviceTypes = this.dnsSd.listServiceTypes( this.domain, !super.insecureMode );
+        } catch(LookupException le) {
+            throw new DnsServiceException(le.dnsError(), 
+                                          String.format(DisplayUtil.map(le.dnsError()), domain), 
+                                          true);
+        }
+        for ( String serviceType : serviceTypes ) {
 			consoleWriter.log( serviceType );
 		}
 	}

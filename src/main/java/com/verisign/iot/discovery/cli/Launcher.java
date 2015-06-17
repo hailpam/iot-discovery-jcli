@@ -26,8 +26,8 @@ public class Launcher {
 
 		try {
 			// Parse the arguments
-//			OptionSet optionSet = parser.parse( args );
-            OptionSet optionSet = parser.parse( test );
+			OptionSet optionSet = parser.parse( args );
+//            OptionSet optionSet = parser.parse( test );
 
 			// Build the specific command from the parsed arguments
 			Command command = CommandFactory.buildCommand( optionSet );
