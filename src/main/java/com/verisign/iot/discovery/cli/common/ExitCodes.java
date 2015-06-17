@@ -1,10 +1,15 @@
 
-package com.verisign.iot.discovery.cli.exception;
+package com.verisign.iot.discovery.cli.common;
 
 /**
- * Created by nbrasey on 5/4/15.
+ * This class defines a set of exit codes to be used in case of any error.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public enum ExitCodes {
+public enum ExitCodes 
+{
 
 	// General errors
 	GENERIC_ERROR(1, "General unexpected error"),
@@ -27,18 +32,22 @@ public enum ExitCodes {
 	String description;
 
 
-	ExitCodes ( int exitCode, String description ) {
+	ExitCodes ( int exitCode, String description ) 
+    {
 		this.exitCode = exitCode;
 		this.description = description;
 	}
 
 
-	public int getExitCode () {
+	public int getExitCode () 
+    {
 		return this.exitCode;
 	}
 
 
-	public String getDescription () {
+	public String getDescription () 
+    {
 		return this.description;
 	}
+    
 }

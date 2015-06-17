@@ -1,18 +1,26 @@
 
 package com.verisign.iot.discovery.cli.util;
 
+import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import joptsimple.OptionSet;
 
-import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
-
 /**
- * @author nbrasey
- * @version 1.0 May 05, 2015
+ * Utility Class. It defines and implements a set of utility methods to deal with 
+ * command line options parsing.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public final class OptionUtil {
+public final class OptionUtil 
+{
+
+    private static final String checkAddress = "^([0-9]{1,}\\.){0,2}[0-9]{1,}$";
+
 
 	public static String getOptionValue ( OptionSet optionSet, String option, boolean mandatory )
-			throws OptionsNotValidException {
+			throws OptionsNotValidException 
+    {
 		boolean hasOption = optionSet.has( option );
 		if ( !hasOption && mandatory ) {
 			throw new OptionsNotValidException( String.format( "A mandatory option \"%s\" is missing", option ) );
@@ -33,8 +41,15 @@ public final class OptionUtil {
 		}
 	}
 
+    public static boolean checkResolverAddress(String srvAddress)
+    {
+        return srvAddress.matches(checkAddress);
+    }
 
-	private OptionUtil () {
+
+	private OptionUtil () 
+    {
 		throw new AssertionError( String.format( "Class %s not instantiable", this.getClass().getName() ) );
 	}
+    
 }

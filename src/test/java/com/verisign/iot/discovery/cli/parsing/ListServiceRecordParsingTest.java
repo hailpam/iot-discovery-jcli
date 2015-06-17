@@ -58,7 +58,7 @@ public class ListServiceRecordParsingTest {
 		}
 		catch ( Exception e ) {
 			assertTrue( e instanceof ParsingException );
-			assertEquals( "Missing required option(s) [s/service]", e.getMessage() );
+			assertEquals( "Missing required option(s) [s/supplement]", e.getMessage() );
 			throw e;
 		}
 	}

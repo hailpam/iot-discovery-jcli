@@ -1,30 +1,38 @@
 
 package com.verisign.iot.discovery.cli.command;
 
-import java.io.File;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
-import joptsimple.OptionSet;
-
 import com.verisign.iot.discovery.cli.Command;
 import com.verisign.iot.discovery.cli.ConsoleWriter;
 import com.verisign.iot.discovery.cli.console.DefaultConsoleWriter;
 import com.verisign.iot.discovery.cli.console.LibraryObserver;
 import com.verisign.iot.discovery.cli.exception.ExecutionException;
-import com.verisign.iot.discovery.cli.exception.ExitCodeMapper;
-import com.verisign.iot.discovery.cli.exception.ExitCodes;
+import com.verisign.iot.discovery.cli.util.ExitCodeMapper;
+import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
+import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.cli.util.EnvironmentUtil;
+import com.verisign.iot.discovery.cli.util.OptionUtil;
 import com.verisign.iot.discovery.commons.StatusCode;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
 import com.verisign.iot.discovery.services.DnsServicesDiscovery;
+import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import joptsimple.OptionSet;
+
 
 /**
- * Created by nbrasey on 5/4/15.
+ * DNS-SD Command Abstract Class. This class implements the abstract method pattern,
+ * implementing the basic behaviour of a DNS-SD command and delegating to the 
+ * specific instances the instantiation and execution details.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public abstract class DnsSdAbstractCommand implements Command {
+public abstract class DnsSdAbstractCommand implements Command 
+{
 
 	protected DnsServicesDiscovery dnsSd;
 	protected ConsoleWriter consoleWriter;
@@ -36,12 +44,12 @@ public abstract class DnsSdAbstractCommand implements Command {
 	protected String trustAnchorFileLocation = null;
 
 
-	public DnsSdAbstractCommand () {
-	}
+	public DnsSdAbstractCommand () {}
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException {
+	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+    {
 
 		// Initialize the insecure mode from the arguments or from the environment
 		this.insecureMode = this.insecureMode || optionSet.has( Options.INSECURE );
@@ -69,7 +77,7 @@ public abstract class DnsSdAbstractCommand implements Command {
 		if ( this.trustAnchorFileLocation != null ) {
 			this.dnsSd.trustAnchorFile( new File( this.trustAnchorFileLocation ) );
 		}
-		
+
 		LibraryObserver libraryObserver = new LibraryObserver( this.consoleWriter );
 
 		this.dnsSd.introspected( true );
@@ -79,16 +87,20 @@ public abstract class DnsSdAbstractCommand implements Command {
 
 
 	@Override
-	public void execute () throws ExecutionException {
+	public void execute () throws ExecutionException 
+    {
 
 		// Set the DNS server
 		if ( this.dnsServer != null && !this.dnsServer.trim().isEmpty() ) {
 			try {
 				InetAddress inetAddress = InetAddress.getByName( this.dnsServer );
 				this.dnsSd.dnsServer( inetAddress );
+                if(OptionUtil.checkResolverAddress(dnsServer))
+                    throw new UnknownHostException("Invalid Resolver Address");
 			}
 			catch ( UnknownHostException e ) {
-				throw new ExecutionException( String.format( "%s: Name or service not known", this.dnsServer ),
+				throw new ExecutionException( String.format( DisplayUtil.INVALID_DNS_HOST,
+                        this.dnsServer ),
 						ExitCodes.UNKNOWN_DNS_SRV_HOST.getExitCode() );
 			}
 		}
@@ -111,5 +123,6 @@ public abstract class DnsSdAbstractCommand implements Command {
 	}
 
 
-	public abstract void doExecute ( ConsoleWriter consoleWriter ) throws DnsServiceException;
+	public abstract void doExecute ( ConsoleWriter consoleWriter )
+                            throws DnsServiceException;
 }

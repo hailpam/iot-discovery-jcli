@@ -4,11 +4,18 @@ package com.verisign.iot.discovery.cli.util;
 import com.verisign.iot.discovery.cli.common.EnvVariables;
 
 /**
- * Created by nbrasey on 4/30/15.
+ * Utility Class. It defines a set of utility methods to aid in dealing with 
+ * environment variables.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public final class EnvironmentUtil {
+public final class EnvironmentUtil 
+{
 
-	public static boolean isInsecureEnvironment () {
+	public static boolean isInsecureEnvironment () 
+    {
 		String insecureEnvVarString = EnvironmentUtil.getEnv( EnvVariables.INSECURE_SYSTEM_ENV );
 
 		if ( insecureEnvVarString != null && !insecureEnvVarString.trim().isEmpty() ) {
@@ -20,16 +27,20 @@ public final class EnvironmentUtil {
 				return false;
 			}
 		}
+        
 		return false;
 	}
 
 
-	public static String getEnv ( String envVariableName ) {
+	public static String getEnv ( String envVariableName ) 
+    {
 		return System.getenv( envVariableName );
 	}
 
 
-	private EnvironmentUtil () {
+	private EnvironmentUtil () 
+    {
 		throw new AssertionError( String.format( "Class %s not instantiable", this.getClass().getName() ) );
 	}
+    
 }
