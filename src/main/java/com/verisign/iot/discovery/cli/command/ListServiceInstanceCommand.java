@@ -15,16 +15,22 @@ import java.util.Set;
 import joptsimple.OptionSet;
 
 /**
- * Created by nbrasey on 5/4/15.
+ * This class defines the listing Service Instances command.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public class ListServiceInstanceCommand extends DnsSdAbstractCommand {
+public class ListServiceInstanceCommand extends DnsSdAbstractCommand 
+{
 
 	private Fqdn domain;
 	private String serviceType;
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException {
+	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+    {
 		super.initialize( optionSet );
 
 		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
@@ -36,7 +42,8 @@ public class ListServiceInstanceCommand extends DnsSdAbstractCommand {
 
 	@Override
 	public void doExecute ( ConsoleWriter consoleWriter )
-                    throws DnsServiceException {
+                    throws DnsServiceException 
+    {
         Set<ServiceInstance> serviceInstances = null;
         try {
 			serviceInstances = this.dnsSd.listServiceInstances( this.domain, this.serviceType, 
@@ -50,4 +57,5 @@ public class ListServiceInstanceCommand extends DnsSdAbstractCommand {
 			consoleWriter.log( instance.toString() );
 		}
 	}
+    
 }

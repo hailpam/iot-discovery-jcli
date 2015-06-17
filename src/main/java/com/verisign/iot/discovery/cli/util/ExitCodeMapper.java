@@ -1,16 +1,22 @@
 
-package com.verisign.iot.discovery.cli.exception;
+package com.verisign.iot.discovery.cli.util;
 
+import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.commons.StatusCode;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author nbrasey 
- * @version 1.0 May 06, 2015
+ * Utility Class. It has a set of definitions and facilities to deal with
+ * <code>ExitCodes</code> (mapped to <code>StatusCode</code>, 
+ * see <a href="https://github.com/verisign/iot-discovery-services">IoT Services Discovery</a>).
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public final class ExitCodeMapper {
+public final class ExitCodeMapper 
+{
 
     private static Map<StatusCode, ExitCodes> exitCodeMap = null;
 

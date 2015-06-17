@@ -14,7 +14,11 @@ import java.util.Set;
 import joptsimple.OptionSet;
 
 /**
- * Created by nbrasey on 5/4/15.
+ * This class defines the listing Text Records command.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
 public class ListTextRecordCommand extends DnsSdAbstractCommand 
 {

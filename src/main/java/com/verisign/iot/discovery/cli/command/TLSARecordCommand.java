@@ -14,7 +14,11 @@ import java.util.Set;
 import joptsimple.OptionSet;
 
 /**
- * Created by tjmurphy on 6/1/15.
+ * This class defines the listing TLSA certficates command.
+ * 
+ * @author nbrasey <tmurphy@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
 public class TLSARecordCommand extends DnsSdAbstractCommand 
 {
@@ -50,4 +54,5 @@ public class TLSARecordCommand extends DnsSdAbstractCommand
 			consoleWriter.log( record.toDisplay() );
 		}
 	}
+    
 }

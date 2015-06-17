@@ -10,15 +10,23 @@ import com.verisign.iot.discovery.exceptions.DnsServiceException;
 import com.verisign.iot.discovery.exceptions.LookupException;
 import joptsimple.OptionSet;
 
+
 /**
- * Created by nbrasey on 5/4/15.
+ * This class defines the DNSSEC status check command.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public class CheckDnsSecCommand extends DnsSdAbstractCommand {
+public class CheckDnsSecCommand extends DnsSdAbstractCommand 
+{
 
     private Fqdn domain;
 
+    
     @Override
-    public void initialize(OptionSet optionSet) throws OptionsNotValidException {
+    public void initialize(OptionSet optionSet) throws OptionsNotValidException 
+    {
         super.initialize(optionSet);
 
         String domainStr = null;
@@ -34,7 +42,8 @@ public class CheckDnsSecCommand extends DnsSdAbstractCommand {
     }
 
     @Override
-    public void doExecute(ConsoleWriter consoleWriter) throws DnsServiceException {
+    public void doExecute(ConsoleWriter consoleWriter) throws DnsServiceException 
+    {
 
         try {
             this.dnsSd.isDnsSecValid(this.domain);
@@ -46,4 +55,5 @@ public class CheckDnsSecCommand extends DnsSdAbstractCommand {
                                           true);
         }
     }
+    
 }

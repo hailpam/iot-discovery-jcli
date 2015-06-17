@@ -1,9 +1,14 @@
 package com.verisign.iot.discovery.cli.parser;
 
 /**
- * Created by nbrasey on 4/30/15.
+ * Utility Class. It defines constants and usage display.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public final class Options {
+public final class Options 
+{
 
     public static final String HELP = "help";
     public static final String HELP_S = "h";
@@ -93,4 +98,5 @@ public final class Options {
     {
         throw new AssertionError(String.format("Class %s not instantiable", this.getClass().getName()));
     }
+    
 }

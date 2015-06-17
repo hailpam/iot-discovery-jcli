@@ -8,19 +8,26 @@ import com.verisign.iot.discovery.exceptions.DnsServiceException;
 import joptsimple.OptionSet;
 
 /**
- * Created by nbrasey on 5/4/15.
+ * This class defines the Help/Usage command.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public class ShowHelpCommand extends DnsSdAbstractCommand {
+public class ShowHelpCommand extends DnsSdAbstractCommand 
+{
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException {
+	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+    {
 		super.initialize( optionSet );
 	}
 
 
 	@Override
 	public void doExecute ( ConsoleWriter consoleWriter )
-                    throws DnsServiceException {
+                    throws DnsServiceException 
+    {
 		consoleWriter.log( Options.getUsage() );
 	}
 

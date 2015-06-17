@@ -14,16 +14,22 @@ import java.util.Set;
 import joptsimple.OptionSet;
 
 /**
- * Created by nbrasey on 5/4/15.
+ * This class defines the listing Service Records command.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public class ListServiceRecordCommand extends DnsSdAbstractCommand {
+public class ListServiceRecordsCommand extends DnsSdAbstractCommand 
+{
 
 	private Fqdn domain;
 	private String serviceType;
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException {
+	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+    {
 		super.initialize( optionSet );
 
 		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
@@ -35,7 +41,8 @@ public class ListServiceRecordCommand extends DnsSdAbstractCommand {
 
 	@Override
 	public void doExecute ( ConsoleWriter consoleWriter )
-                    throws DnsServiceException {
+                    throws DnsServiceException 
+    {
 		Set<ServiceRecord> serviceRecords = null;
         try {
             serviceRecords = this.dnsSd.listServiceRecords( this.domain, this.serviceType, 

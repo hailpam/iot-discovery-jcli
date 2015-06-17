@@ -8,8 +8,11 @@ import joptsimple.OptionException;
 import joptsimple.OptionSet;
 
 /**
- * @author nbrasey
- * @version 1.0 May 05, 2015
+ * Specific and default implementation of the <code>CommandOptionParser</code>.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
 public class DefaultOptionParser implements CommandOptionParser 
 {

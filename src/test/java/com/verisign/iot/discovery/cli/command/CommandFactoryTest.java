@@ -35,7 +35,7 @@ public class CommandFactoryTest {
 	@Test
 	public void testServiceRecordCommand () throws Exception {
 		Command command = buildCommand( "-r -d domain -s serviceType" );
-		assertTrue( command instanceof ListServiceRecordCommand );
+		assertTrue( command instanceof ListServiceRecordsCommand );
 	}
 
 

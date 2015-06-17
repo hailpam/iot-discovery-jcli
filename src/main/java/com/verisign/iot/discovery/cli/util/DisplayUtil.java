@@ -3,11 +3,15 @@ package com.verisign.iot.discovery.cli.util;
 import com.verisign.iot.discovery.commons.StatusCode;
 
 /**
- *
+ * Utility Class. It defines constant message and utility functions to display any
+ * error message on the default output streams.
  *
  * @author pmaresca <pmaresca@verisign.com>
+ * @version 1.0
+ * @since 6/16/15.
  */
-public class DisplayUtil {
+public class DisplayUtil 
+{
 
     public static final String UNEXPECTED_ERROR = "Unexpected Error";
     public static final String INVALID_ARGUMENT = "Invalid Argument Usage";

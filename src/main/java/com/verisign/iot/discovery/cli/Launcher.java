@@ -4,7 +4,7 @@ package com.verisign.iot.discovery.cli;
 import com.verisign.iot.discovery.cli.console.DefaultConsoleWriter;
 import com.verisign.iot.discovery.cli.exception.CommandNotFoundException;
 import com.verisign.iot.discovery.cli.exception.ExecutionException;
-import com.verisign.iot.discovery.cli.exception.ExitCodes;
+import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.exception.ParsingException;
 import com.verisign.iot.discovery.cli.parser.DefaultOptionParser;
@@ -12,11 +12,18 @@ import com.verisign.iot.discovery.cli.parser.Options;
 import joptsimple.OptionSet;
 
 /**
- * Created by nbrasey on 4/30/15.
+ * Launcher application. This class contains the main method to start up the 
+ * command line application.
+ * 
+ * @author nbrasey <nbrasey@verisign.com>
+ * @version 1.0
+ * @since 4/30/15.
  */
-public class Launcher {
+public class Launcher 
+{
 
-	public static void main ( String[] args ) {
+	public static void main ( String[] args ) 
+    {
 
 		ConsoleWriter consoleWriter = new DefaultConsoleWriter();
 
@@ -64,4 +71,5 @@ public class Launcher {
 			System.exit( ExitCodes.GENERIC_ERROR.getExitCode() );
 		}
 	}
+    
 }
