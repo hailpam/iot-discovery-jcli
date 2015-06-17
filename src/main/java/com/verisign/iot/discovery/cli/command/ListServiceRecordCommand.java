@@ -29,7 +29,7 @@ public class ListServiceRecordCommand extends DnsSdAbstractCommand {
 		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
 		this.domain = new Fqdn(domainStr);
 
-		this.serviceType = OptionUtil.getOptionValue(optionSet, Options.SERVICE, true);
+		this.serviceType = OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true);
 	}
 
 

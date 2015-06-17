@@ -86,7 +86,7 @@ public class DefaultOptionParser implements CommandOptionParser {
 				.withRequiredArg()
 				.ofType( String.class );
 		this.parser
-				.acceptsAll( Arrays.asList( Options.SERVICE_S, Options.SERVICE ), "service" )
+				.acceptsAll( Arrays.asList(Options.SUPPLEMENT_S, Options.SUPPLEMENT ), "service" )
 				.requiredIf(Options.LIST_INSTANCES, Options.SERVICE_RECORD)
 				.withRequiredArg()
 				.ofType( String.class );
