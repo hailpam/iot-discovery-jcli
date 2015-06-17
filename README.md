@@ -3,15 +3,15 @@
 ## Intro
 
 ### Verisign Device Services
-http://www.verisigninc.com/en_US/security-services/the-internet-of-things/index.xhtml 
+http://www.verisigninc.com/en_US/security-services/the-internet-of-things/index.xhtml
 
 ### Purpose
 This project aims at providing a comprehensive command line tool to lookup Device Services. Developers, Customers, etc., may use and contribute to this tool.
 
-The command line tool makes use of the Verisign' Discovery Services APIs (https://github.com/verisign/iot-discovery-services). 
+The command line tool makes use of the Verisign' Discovery Services APIs (https://github.com/verisign/iot-discovery-services).
 
 ## Build Process
-This is a Gradle project, so pretty intuitive to build up. Hereafter a simple example on how to get started in building it. 
+This is a Gradle project, so pretty intuitive to build up. Hereafter a simple example on how to get started in building it.
 
 ```
 cd $PROJECT_HOME
@@ -24,21 +24,23 @@ cd $PROJECT_HOME
 java -jar build/libs/iot-discovery-jcli-1.0.jar
 
 ERROR: invalid command arguments: Missing command
-Usage: java -jar iot-discovery-jcli-1.0.jar [OPTIONS]
-Options:
-  -h, --help                              	display this help and exit              
-  -v, --verbose                           	turn on verbose output                  
-  -c, --dnssec-status                     	check DNSSEC status of DNS server [default server or specified by --server]
-  -d DOMAIN, --domain DOMAIN              	domain name to query/check DNSSEC status [optional if -c, --dnssec-status is specified, otherwise it is required.]
-  -e, --insecure                          	do not perform DNSSEC validation of DOMAIN [optional]
-                                          	DNSSEC validation can also be disabled by setting INSECURE=1 in environment
-  -i, --list-instances                    	list details of service instances [--service/--domain is required]
-  -l, --list-services                     	list details of services [--domain is required]
-  -n SERVER, --server SERVER              	DNS server to override default DNS server [optional]
-  -r, --service-record                    	get service record [--service is required]
-  -s SERVICENAME, --service SERVICENAME   	service name to query                   
-  -t TXTLABEL, --text-record TXTLABEL     	get text record                         
-  -u, --trust-anchor                      	specify file containing trust anchor keys [optional]
+Usage: java -jar iot-discovery-jcli-1.0.jar [<command>[<arg>]] [options]
+Commands:
+  -h, --help                              	Display this usage and quit.
+  -i, --list-instances                    	Detailed display of service instances; -s and -d are required.
+  -l, --list-services                     	Display the service types; -d is required.
+  -r, --service-records                   	Detailed display of service records; -s and -d are required.
+  -c [domain], --dnssec-status [domain]   	Check the DNSSEC status of 'domain'; if not specified, check against the default one.
+  -x [port:protocol], --tlsa [port:protocol]	Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s are required.
+  -t <label>, --text-record <label>       	Display the text records having 'label'; -d is required.
+Options
+  -e, --insecure                          	Inhibit the DNSSEC validation upon lookup.
+  -v, --verbose                           	Display a verbose output of the resolution.
+  -n <resolvers>, --servers <resolvers>   	Comma-separated list of resolver servers, overriding the default ones.
+  -u <filename>, --trust-anchor <filename>	Specify the file containing the trust anchor.
+  -d <domain>, --domain <domain>          	Specify the domain name to use upon resolution process.
+  -s <label>, --supplement <label>        	Specify a supplementary 'label' to concatenate/use to query for.
+
 ```
 
 ## Example of Use
