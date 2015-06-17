@@ -22,7 +22,7 @@ public class Launcher {
 
 		CommandOptionParser parser = new DefaultOptionParser();
 
-        String test[] = { "--tlsa", "-d", "Devicex.djk6epmd4tlq.1.iotverisign.com", "-e" };
+//        String test[] = { "-d", "com", "-t", "example", "-n", "8.8.8.8" };
 
 		try {
 			// Parse the arguments

@@ -68,7 +68,7 @@ public final class Options {
         sb.append(String.format("  %-40s\t%-40s", "-" + TLSA_RECORD_S +" [port:protocol], --" + TLSA_RECORD +" [port:protocol]", 
                                 "Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s are required.")).append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + TEXT_RECORD_S + " <label>, --" + TEXT_RECORD +" <label>", 
-                                    "Display the text records having 'label'.")).append("\n");
+                                    "Display the text records having 'label'; -d is required.")).append("\n");
         
         sb.append("Options").append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + INSECURE_S + ", --" + INSECURE, "Inhibit the "

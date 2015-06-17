@@ -16,25 +16,27 @@ import joptsimple.OptionSet;
 /**
  * Created by nbrasey on 5/4/15.
  */
-public class ListTextRecordCommand extends DnsSdAbstractCommand {
+public class ListTextRecordCommand extends DnsSdAbstractCommand 
+{
 
 	private Fqdn domain;
 	private String textRecord;
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException {
+	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+    {
 		super.initialize( optionSet );
-
-		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
-		this.domain = new Fqdn(domainStr);
+        
+		this.domain = new Fqdn(OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true ));
 		this.textRecord = optionSet.valueOf( Options.TEXT_RECORD ).toString();
 	}
 
 
 	@Override
 	public void doExecute ( ConsoleWriter consoleWriter )
-                    throws DnsServiceException {
+                    throws DnsServiceException 
+    {
 		Set<TextRecord> textRecords = null;
         try {
             textRecords = this.dnsSd.listTextRecords( this.domain, this.textRecord,
@@ -48,4 +50,5 @@ public class ListTextRecordCommand extends DnsSdAbstractCommand {
 			consoleWriter.log( textRecord.toString() );
 		}
 	}
+    
 }
