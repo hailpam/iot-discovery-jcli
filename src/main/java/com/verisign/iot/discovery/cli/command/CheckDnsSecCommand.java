@@ -1,11 +1,13 @@
 package com.verisign.iot.discovery.cli.command;
 
 import com.verisign.iot.discovery.cli.ConsoleWriter;
+import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.cli.exception.ExecutionException;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
 import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.commons.Constants;
+import com.verisign.iot.discovery.commons.StatusCode;
 import com.verisign.iot.discovery.domain.Fqdn;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
 import com.verisign.iot.discovery.exceptions.LookupException;
@@ -38,8 +40,12 @@ public class CheckDnsSecCommand extends DnsSdAbstractCommand
         if (domainStr == null) {
             domainStr = Constants.DEFAULT_DNSSEC_DOMAIN;
         }
-
-        this.domain = new Fqdn(domainStr);
+        try{
+            this.domain = new Fqdn(domainStr);
+        } catch(IllegalArgumentException iae) {
+            throw new ExecutionException(DisplayUtil.map(StatusCode.ILLEGAL_FQDN),
+                                         ExitCodes.INVALID_FQDN.getExitCode());
+        }
     }
 
     @Override
