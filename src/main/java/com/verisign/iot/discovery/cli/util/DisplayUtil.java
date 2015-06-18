@@ -24,7 +24,7 @@ public class DisplayUtil
     public static final String DNS_FAILURE = "DNS Server Failure";
     public static final String DNS_NAME_NOT_EXIST = "DNS Name does not exist: [%s]";
     public static final String RR_TYPE_NOT_EXIST = "RR Type does not exist";
-    public static final String INVALID_FQDN = "Invalid Fully Qualified Domain Name: [%s]";
+    public static final String INVALID_FQDN = "Invalid Fully Qualified Domain Name";
 
     public static final String SECURE_DNS_RESPONSE = "DNSSEC Status Check for domain successful";
 
@@ -39,6 +39,7 @@ public class DisplayUtil
             return INSECURE_DNS_RESPONSE;
         else if(status == StatusCode.RESOURCE_LOOKUP_ERROR) return LOOKUP_ERROR;
         else if(status == StatusCode.NETWORK_ERROR) return UNREACHABLE_DNS;
+        else if(status == StatusCode.ILLEGAL_FQDN) return INVALID_FQDN;
 
         return String.format("Unrecognized status: [%s]", status.statusLabel());
     }

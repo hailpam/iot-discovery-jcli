@@ -3,15 +3,15 @@ package com.verisign.iot.discovery.cli.command;
 
 import com.verisign.iot.discovery.cli.Command;
 import com.verisign.iot.discovery.cli.ConsoleWriter;
+import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.cli.console.DefaultConsoleWriter;
 import com.verisign.iot.discovery.cli.console.LibraryObserver;
 import com.verisign.iot.discovery.cli.exception.ExecutionException;
-import com.verisign.iot.discovery.cli.util.ExitCodeMapper;
-import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
 import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.cli.util.EnvironmentUtil;
+import com.verisign.iot.discovery.cli.util.ExitCodeMapper;
 import com.verisign.iot.discovery.cli.util.OptionUtil;
 import com.verisign.iot.discovery.commons.StatusCode;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
@@ -24,14 +24,14 @@ import joptsimple.OptionSet;
 
 /**
  * DNS-SD Command Abstract Class. This class implements the abstract method pattern,
- * implementing the basic behaviour of a DNS-SD command and delegating to the 
+ * implementing the basic behaviour of a DNS-SD command and delegating to the
  * specific instances the instantiation and execution details.
- * 
+ *
  * @author nbrasey <nbrasey@verisign.com>
  * @version 1.0
  * @since 4/30/15.
  */
-public abstract class DnsSdAbstractCommand implements Command 
+public abstract class DnsSdAbstractCommand implements Command
 {
 
 	protected DnsServicesDiscovery dnsSd;
@@ -48,7 +48,7 @@ public abstract class DnsSdAbstractCommand implements Command
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException 
+	public void initialize ( OptionSet optionSet ) throws ExecutionException, OptionsNotValidException
     {
 
 		// Initialize the insecure mode from the arguments or from the environment
@@ -87,7 +87,7 @@ public abstract class DnsSdAbstractCommand implements Command
 
 
 	@Override
-	public void execute () throws ExecutionException 
+	public void execute () throws ExecutionException
     {
 
 		// Set the DNS server

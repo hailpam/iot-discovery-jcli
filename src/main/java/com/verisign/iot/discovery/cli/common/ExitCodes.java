@@ -3,12 +3,12 @@ package com.verisign.iot.discovery.cli.common;
 
 /**
  * This class defines a set of exit codes to be used in case of any error.
- * 
+ *
  * @author nbrasey <nbrasey@verisign.com>
  * @version 1.0
  * @since 4/30/15.
  */
-public enum ExitCodes 
+public enum ExitCodes
 {
 
 	// General errors
@@ -25,29 +25,30 @@ public enum ExitCodes
 	RESOURCE_UNEXPECTED(9, "Unexpected Resource Record Type"),
 	DNS_SERVER_ERROR(10, "DNS server failure"),
 	RESOLUTION_NAME_ERROR(11, "DNS name does not exist"),
-	RESOLUTION_RR_TYPE_ERROR(12, "RR Type does not exist");
+	RESOLUTION_RR_TYPE_ERROR(12, "RR Type does not exist"),
+    INVALID_FQDN(13, "Invalid fully qualified domain name");
 
 
 	int exitCode;
 	String description;
 
 
-	ExitCodes ( int exitCode, String description ) 
+	ExitCodes ( int exitCode, String description )
     {
 		this.exitCode = exitCode;
 		this.description = description;
 	}
 
 
-	public int getExitCode () 
+	public int getExitCode ()
     {
 		return this.exitCode;
 	}
 
 
-	public String getDescription () 
+	public String getDescription ()
     {
 		return this.description;
 	}
-    
+
 }
