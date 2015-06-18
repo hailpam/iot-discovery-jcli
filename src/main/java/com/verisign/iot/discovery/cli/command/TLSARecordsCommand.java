@@ -1,6 +1,7 @@
 package com.verisign.iot.discovery.cli.command;
 
 import com.verisign.iot.discovery.cli.ConsoleWriter;
+import com.verisign.iot.discovery.cli.exception.ExecutionException;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
 import com.verisign.iot.discovery.cli.util.DisplayUtil;
@@ -28,7 +29,7 @@ public class TLSARecordsCommand extends DnsSdAbstractCommand
 
 
 	@Override
-	public void initialize ( OptionSet optionSet ) throws OptionsNotValidException
+	public void initialize ( OptionSet optionSet ) throws ExecutionException, OptionsNotValidException
     {
 		super.initialize( optionSet );
         this.domain = new Fqdn(OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true),

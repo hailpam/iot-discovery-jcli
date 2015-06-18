@@ -29,7 +29,6 @@ Commands:
   -h, --help                              	Display this usage and quit.
   -i, --list-instances                    	Detailed display of service instances; -s and -d are required.
   -l, --list-services                     	Display the service types; -d is required.
-  -r, --service-records                   	Detailed display of service records; -s and -d are required.
   -c [domain], --dnssec-status [domain]   	Check the DNSSEC status of 'domain'; if not specified, check against the default one.
   -x [port:protocol], --tlsa [port:protocol]	Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s are required.
   -t <label>, --text-record <label>       	Display the text records having 'label'; -d is required.

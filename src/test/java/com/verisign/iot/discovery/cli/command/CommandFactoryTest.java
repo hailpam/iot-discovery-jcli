@@ -1,16 +1,13 @@
 
 package com.verisign.iot.discovery.cli.command;
 
-import static org.junit.Assert.assertTrue;
-
-import joptsimple.OptionSet;
-
-import org.junit.Test;
-
 import com.verisign.iot.discovery.cli.Command;
 import com.verisign.iot.discovery.cli.CommandFactory;
 import com.verisign.iot.discovery.cli.TestUtils;
 import com.verisign.iot.discovery.cli.parser.DefaultOptionParser;
+import joptsimple.OptionSet;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * @author nbrasey
@@ -29,13 +26,6 @@ public class CommandFactoryTest {
 	public void testServiceInstanceCommand () throws Exception {
 		Command command = buildCommand( "-i -d domain -s serviceType" );
 		assertTrue( command instanceof ListServiceInstanceCommand );
-	}
-
-
-	@Test
-	public void testServiceRecordCommand () throws Exception {
-		Command command = buildCommand( "-r -d domain -s serviceType" );
-		assertTrue( command instanceof ListServiceRecordsCommand );
 	}
 
 
