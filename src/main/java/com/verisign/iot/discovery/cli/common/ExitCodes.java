@@ -21,12 +21,13 @@ public enum ExitCodes
 	LIB_CONFIGURATION_ERROR(5, "Inconsistent secured DNS settings"),
 	NETWORK_ERROR(6, "Unreachable DNS or timeout expired"),
 	RESOURCE_LOOKUP_ERROR(7, "Generic Lookup error"),
-	RESOURCE_INSECURE_ERROR(8, "Unsecured DNS packet"),
+	RESOURCE_INSECURE_ERROR(8, "Insecure DNS packet"),
 	RESOURCE_UNEXPECTED(9, "Unexpected Resource Record Type"),
 	DNS_SERVER_ERROR(10, "DNS server failure"),
 	RESOLUTION_NAME_ERROR(11, "DNS name does not exist"),
 	RESOLUTION_RR_TYPE_ERROR(12, "RR Type does not exist"),
-    INVALID_FQDN(13, "Invalid fully qualified domain name");
+    INVALID_FQDN(13, "Invalid fully qualified domain name"),
+    DNSSEC_STATUS_ERROR(14, "DNSSEC status check failed");
 
 
 	int exitCode;
