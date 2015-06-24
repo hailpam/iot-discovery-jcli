@@ -28,6 +28,7 @@ public final class ExitCodeMapper
         exitCodeMap.put(StatusCode.NETWORK_ERROR, ExitCodes.NETWORK_ERROR);
         exitCodeMap.put(StatusCode.RESOURCE_LOOKUP_ERROR, ExitCodes.RESOURCE_LOOKUP_ERROR);
         exitCodeMap.put(StatusCode.RESOURCE_INSECURE_ERROR, ExitCodes.RESOURCE_INSECURE_ERROR);
+        exitCodeMap.put(StatusCode.DNSSEC_STATUS_ERROR, ExitCodes.DNSSEC_STATUS_ERROR);
         exitCodeMap.put(StatusCode.RESOURCE_UNEXPECTED, ExitCodes.RESOURCE_UNEXPECTED);
         exitCodeMap.put(StatusCode.ILLEGAL_FQDN, ExitCodes.INVALID_FQDN);
         exitCodeMap.put(StatusCode.SERVER_ERROR, ExitCodes.DNS_SERVER_ERROR);
