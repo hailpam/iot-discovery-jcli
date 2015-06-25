@@ -23,7 +23,7 @@ public class DisplayUtil
     public static final String DNSSEC_STATUS_ERROR = "DNSSEC Status Check failed for domain";
     public static final String UNEXPECTED_RR_TYPE = "Unexpected Resource Record Type";
     public static final String DNS_FAILURE = "DNS Server Failure";
-    public static final String DNS_NAME_NOT_EXIST = "DNS Name does not exist: [%s]";
+    public static final String DNS_NAME_NOT_EXIST = "DNS Name does not exist";
     public static final String RR_TYPE_NOT_EXIST = "RR Type does not exist";
     public static final String INVALID_FQDN = "Invalid Fully Qualified Domain Name";
 
