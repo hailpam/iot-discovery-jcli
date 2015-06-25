@@ -70,7 +70,7 @@ public final class Options
         sb.append(String.format("  %-40s\t%-40s", "-" + TEXT_RECORD_S + " <label>, --" + TEXT_RECORD +" <label>",
                                     "Display the text records having 'label'; -d is required.")).append("\n");
 
-        sb.append("Options").append("\n");
+        sb.append("Options:").append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + INSECURE_S + ", --" + INSECURE, "Inhibit the "
                                 + "DNSSEC validation upon lookup.")).append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + VERBOSE_S + ", --" + VERBOSE, "Display a verbose "
