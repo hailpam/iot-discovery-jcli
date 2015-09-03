@@ -45,7 +45,7 @@ Options
 ## Example of Use
 ```
 cd $PROJECT_HOME
-java -jar /build/libs/iot-discovery-jcli-1.0.jar -d mcn366rzmd2a.1.iotverisign.com -i -s mqtt
+java -jar ./build/libs/iot-discovery-jcli-1.0.jar -d mcn366rzmd2a.1.iotverisign.com -i -s mqtt
 
 mqtt austriamqtt.example.com:1882 60 "qos=1"
 mqtt zambiamqtt.example.com:1882 60 "qos=1"
