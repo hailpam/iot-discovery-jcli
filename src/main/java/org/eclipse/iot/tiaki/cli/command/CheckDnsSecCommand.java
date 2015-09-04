@@ -15,11 +15,11 @@ import org.eclipse.iot.tiaki.cli.exception.ExecutionException;
 import org.eclipse.iot.tiaki.cli.exception.OptionsNotValidException;
 import org.eclipse.iot.tiaki.cli.parser.Options;
 import org.eclipse.iot.tiaki.cli.util.DisplayUtil;
-import com.verisign.iot.discovery.commons.Constants;
-import com.verisign.iot.discovery.commons.StatusCode;
-import com.verisign.iot.discovery.domain.Fqdn;
-import com.verisign.iot.discovery.exceptions.DnsServiceException;
-import com.verisign.iot.discovery.exceptions.LookupException;
+import org.eclipse.iot.tiaki.commons.Constants;
+import org.eclipse.iot.tiaki.commons.StatusCode;
+import org.eclipse.iot.tiaki.domain.Fqdn;
+import org.eclipse.iot.tiaki.exceptions.DnsServiceException;
+import org.eclipse.iot.tiaki.exceptions.LookupException;
 import joptsimple.OptionSet;
 
 

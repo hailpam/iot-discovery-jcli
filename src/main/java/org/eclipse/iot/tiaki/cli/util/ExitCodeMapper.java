@@ -10,7 +10,7 @@
 package org.eclipse.iot.tiaki.cli.util;
 
 import org.eclipse.iot.tiaki.cli.common.ExitCodes;
-import com.verisign.iot.discovery.commons.StatusCode;
+import org.eclipse.iot.tiaki.commons.StatusCode;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -9,7 +9,7 @@
 
 package org.eclipse.iot.tiaki.cli.util;
 
-import com.verisign.iot.discovery.commons.StatusCode;
+import org.eclipse.iot.tiaki.commons.StatusCode;
 
 /**
  * Utility Class. It defines constant message and utility functions to display any

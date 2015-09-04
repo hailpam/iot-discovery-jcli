@@ -13,7 +13,7 @@ import org.eclipse.iot.tiaki.cli.ConsoleWriter;
 import org.eclipse.iot.tiaki.cli.exception.ExecutionException;
 import org.eclipse.iot.tiaki.cli.exception.OptionsNotValidException;
 import org.eclipse.iot.tiaki.cli.parser.Options;
-import com.verisign.iot.discovery.exceptions.DnsServiceException;
+import org.eclipse.iot.tiaki.exceptions.DnsServiceException;
 import joptsimple.OptionSet;
 
 /**
