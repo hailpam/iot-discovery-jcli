@@ -1,11 +1,73 @@
 #!/bin/bash
 
-PATH_TO_JAVA="workspaces/java/iot-github/iot-discovery-jcli"
+echo "info: '$(basename $0)' executing in: $PWD" 
+
+# Check env variable setup
+if [ -z $PATH_TO_JAVA ];
+then
+    # Path to the Java CLI
+    PATH_TO_JAVA="workspaces/java/iot-github/iot-discovery-jcli"
+    echo "warning: env variable 'PATH_TO_JAVA' (path to Java CLI) not set: default: $PATH_TO_JAVA"
+fi
+
+TEST_SCRIPT=$(basename $0)
+EXIT_CODES_FILE="exit-codes.sh"
+
+# Check the same directory of exit codes
+stat $TEST_SCRIPT &> /dev/null
+if [ $? -ne 0 ];
+then
+   echo "error: script and exit codes in different directories"
+   exit 1
+fi
 
 # Tools
 JCLI="java -jar $DEV_HOME/$PATH_TO_JAVA/build/libs/iot-discovery-jcli-1.0.jar"
 
-# Comparisons to be done
+# Functions
+function help {
+    echo "usage: cli-tester.sh <generate>|<check>|<nocheck>"
+    echo " <generate>    Generate an associative array of Exit Codes upon an unchecked run (useful when the script runs for the first time on a platform)"
+    echo " <check>       Checked run: expected Exit Codes are checked against the actual ones"
+    echo " <unchecked>   Unckecked run: Exit Codes are not checked (usefel in the first phases of testing)"
+
+    exit 1
+}
+
+function write_script_header () {
+   echo "#!/bin/bash" >> $EXIT_CODES_FILE
+   echo "declare -A CODES" >> $EXIT_CODES_FILE
+}
+
+function write_script_line () {
+  echo "CODES['$1']=$2" >> $EXIT_CODES_FILE
+}
+
+GENERATE="false"
+TEST_EXIT_CODE="false"
+if [ $# -eq 0  ];
+then
+   echo "error: no argument supplied"
+   help
+else
+   if [ "$1" == "check" ];
+   then
+       echo "argument: suppied: '$1': Exit Code testing"
+       TEST_EXIT_CODE="true"
+   elif [ "$1" == "nocheck" ];
+   then
+       echo "argument: supplied: '$1': no Exit Code testing"
+   elif [ "$1" == "generate" ];
+   then
+       echo "argument: supplied: '$1': generating Exit Codes array"
+       GENERATE="true"
+   else
+      echo "argument: supplied: '$1': unrecognized"
+      help
+   fi
+fi
+
+# Test to be executed
 OPTIONS=(
 # List Text Records
 '-d com -t example -n alabalala'
@@ -91,89 +153,27 @@ OPTIONS=(
 '-d djk6epmd4tlq.1.iotverisign.com -s DeviceXYZ -x -n 8.8.8.8'
 '-d djk6epmd4tlq.1.iotverisign.com -s DeviceXYZ -x -n 208.67.222.222'
 '-d djk6epmd4tlq.1.iotverisign.com -s Device2 -x -n 208.67.222.222'
+# Command Line Options
+'-d dns-sd.org -s :printer:udp -i -e'
+'-d dns-sd.org -l -e -i'
+'-d dns-sd.org -t -l -i'
+'-d djk6epmd4tlq.1.iotverisign.com -s :Device2 -x -n 208.67.222.222'
+'-d djk6epmd4tlq.1.iotverisign.com -s a:Device2 -x -n 208.67.222.222'
+'-d djk6epmd4tlq.1.iotverisign.com -s Device2: -x -n 208.67.222.222'
+'-d mcn366rzmd2a.1.iotverisign.com -s :mqtt -i -e'
+'-d mcn366rzmd2a.1.iotverisign.com -s mqtt: -i -e'
+'-d mcn366rzmd2a.1.iotverisign.com -s mqtt:xerox -i -e'
+'-d mcn366rzmd2a.1.iotverisign.com -s tcp:mqtt -i -e'
 )
 
-# Exit Codes to Expect
-declare -A CODES
-CODES['-d com -t example -n alabalala']=4
-CODES['-d com -t example']=0
-CODES['-d coma -t example']=0
-CODES['-d coma -t example']=0
-CODES['-d com -t example -e']=0
-CODES['-d com -t example -n 8.8.4.4']=0
-CODES['-d come -t example -n 1.2.3.4']=6
-CODES['-d com -t exampleXYZ -n 8.8.8']=4
-CODES['-d com -t exampleXYZ']=0
-CODES['-d mail.com -t www']=8
-CODES['-d mail.com -t www -e']=0
-CODES['-d mail.com -t www -n 8.8.8.8']=8
-CODES['-d mail.com -t www -n 208.67.222.222']=8
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t indiamqtt._mqtt._tcp']=0
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t indiamqtt._mqtt._tcp -e']=0
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t indiamqtt._mqtt._tcp -n 8.8.8.8']=0
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t ukamqtt.mqtt.tcp']=0
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t ukmqtt._mqtt._tcp -n 1.2.3.4']=6
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t ukmqtt.mqtt.tcp -e']=0
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t ukmqtt.mqtt.tcp -n 8.8.8.8']=0
-CODES['-d 47zlpxulsrha.1.iotverisign.com -t ukmqtt._mqtt._tcp -n 208.67.222.222']=8
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -i']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -i -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -i -n 8.8.8.8']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -i -n 1.2.3.4']=6
-CODES['-d mcn366rzmd2a.1.iotverisign.comXYZ -s mqtt -i -n 1.2.3.4']=6
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqttXYZ -i -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s abracadabra -i -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s abracadabra -i -n 8.8.4.4']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.comXYZ -s mqtt -i -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.comXYZ -s mqttXYZ -i -n 8.8.8.8']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.comXYZ -s mqttXYZ -i -n 208.67.222.222']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -i -n 208.67.222.222']=8
-CODES['-d dns-sd.org -s pdl-datastream -i -e']=0
-CODES['-d dns-sd.org -s pdl-datastream -i -e -n 8.8.8.8']=0
-CODES['-d dns-sd.org -s ftp -i -e']=1
-CODES['-d dns-sd.org -s ftp -i -e -n 8.8.8.8']=1
-CODES['-d dns-sd.org -s afpovertcp -i -e']=0
-CODES['-d dns-sd.org -s afpovertcp -i -n 8.8.8.8']=8
-CODES['-d avu7unxcs7ia.1.iotverisign.com -s coap:udp -i -e']=0
-CODES['-d avu7unxcs7ia.1.iotverisign.com -s coapspecial:udp -i -e']=0
-CODES['-d dns-sd.org -s http:printer:tcp -i -e']=0
-CODES['-d dns-sd.org -s http:printer:tcp -i -n 8.8.8.8']=8
-CODES['-c']=0
-CODES['-c -n 8.8.8.8']=0
-CODES['-c -n 208.67.222.222']=14
-CODES['-cgoogle.com']=14
-CODES['-cgoogle.com -n 208.67.222.222']=14
-CODES['-cexample.com']=0
-CODES['-cexample.com -n 8.8.8.8']=0
-CODES['-cexample.com -n 208.67.222.222']=14
-CODES['-cwww.mail.com']=14
-CODES['-cwww.mail.com -n 8.8.8.8']=14
-CODES['-cmail.com']=14
-CODES['-cmail.com -n 8.8.8.8']=14
-CODES['-cexample.coma']=11
-CODES['-cexample.coma -n 8.8.4.4']=11
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -l']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -l -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -l -n 8.8.8.8']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.comXYZ -s mqtt -l']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.comXYZ -s mqttXYZ -l -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -l -n 1.2.3.4']=6
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqttXYZ -l -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqttXYZ -l -n 8.8.4.4']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqtt -l -n 208.67.222.222']=8
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s mqttXYZ -l -n 208.67.222.222']=8
-CODES['-d dns-sd.org -l -e']=0
-CODES['-d dns-sd.org -l -n 8.8.8.8']=8
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s Device2 -x']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.comXYZ -s Device2 -x']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s DeviceXYZ -x']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s Device2 -x -e']=0
-CODES['-d mcn366rzmd2a.1.iotverisign.com -s Device2 -x443:tcp -e']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s Device2 -x -n 8.8.8.8']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s DeviceXYZ -x -n 1.2.3.4']=6
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s DeviceXYZ -x -n 8.8.8.8']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s DeviceXYZ -x -n 208.67.222.222']=0
-CODES['-d djk6epmd4tlq.1.iotverisign.com -s Device2 -x -n 208.67.222.222']=8
+# Regenerate the file containing exit codes
+if [ $GENERATE == "true" ];
+then
+    write_script_header
+else
+    source $EXIT_CODES_FILE
+fi
+
 
 # Comparison loop
 CNTR=1
@@ -185,10 +185,19 @@ do
     $JCLI $OPT
     EXIT_CODE=$?
     echo "-** Exit Code $EXIT_CODE **-"
-    if [ $EXIT_CODE != ${CODES[$OPT]} ]; then
-       echo ">FAILED: IS '$EXIT_CODE': EXPECTED '${CODES[$OPT]}'<"
-       exit 1
+    # Regenerate this specific line
+    if [ $GENERATE == "true" ];
+    then
+        write_script_line "$OPT" "$EXIT_CODE"
     fi
-    echo ">PASSED: IS '$EXIT_CODE': EXPECTED '${CODES[$OPT]}' <"
+    if [ $TEST_EXIT_CODE == "true" ];
+    then
+        if [ $EXIT_CODE != ${CODES[$OPT]} ]; 
+        then
+           echo ">FAILED: IS '$EXIT_CODE': EXPECTED '${CODES[$OPT]}'<"
+           exit 1
+        fi
+        echo ">PASSED: IS '$EXIT_CODE': EXPECTED '${CODES[$OPT]}' <"
+    fi
     let CNTR=CNTR+1
 done
