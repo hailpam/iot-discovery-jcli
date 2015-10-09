@@ -1,14 +1,16 @@
 package com.verisign.iot.discovery.cli.command;
 
 import com.verisign.iot.discovery.cli.ConsoleWriter;
+import com.verisign.iot.discovery.cli.common.ExitCodes;
 import com.verisign.iot.discovery.cli.exception.ExecutionException;
 import com.verisign.iot.discovery.cli.exception.OptionsNotValidException;
 import com.verisign.iot.discovery.cli.parser.Options;
 import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.cli.util.OptionUtil;
 import com.verisign.iot.discovery.domain.CertRecord;
+import com.verisign.iot.discovery.domain.CompoundLabel;
+import com.verisign.iot.discovery.domain.DnsCertPrefix;
 import com.verisign.iot.discovery.domain.Fqdn;
-import com.verisign.iot.discovery.domain.TLSAPrefix;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
 import com.verisign.iot.discovery.exceptions.LookupException;
 import java.util.Set;
@@ -25,17 +27,22 @@ public class TLSARecordsCommand extends DnsSdAbstractCommand
 {
 
 	private Fqdn domain;
-	private TLSAPrefix tlsaPrefix;
+    private String label;
+	private DnsCertPrefix tlsaPrefix;
 
 
 	@Override
 	public void initialize ( OptionSet optionSet ) throws ExecutionException, OptionsNotValidException
     {
 		super.initialize( optionSet );
-        this.domain = new Fqdn(OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true),
+        this.label = OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true);
+        if(CompoundLabel.isCompound(label))
+            throw new ExecutionException(DisplayUtil.INVALID_ARGUMENT +": compound label in input",
+                                         ExitCodes.INVALID_ARGS.getExitCode());
+        this.domain = new Fqdn(this.label,
                                OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true ));
 
-		this.tlsaPrefix = new TLSAPrefix( OptionUtil.getOptionValue( optionSet, Options.TLSA_RECORD, false ) );
+		this.tlsaPrefix = new DnsCertPrefix( OptionUtil.getOptionValue( optionSet, Options.TLSA_RECORD, false ) );
     }
 
 

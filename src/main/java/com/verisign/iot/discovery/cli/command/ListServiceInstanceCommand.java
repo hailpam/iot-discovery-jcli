@@ -10,6 +10,7 @@ import com.verisign.iot.discovery.cli.parser.Options;
 import com.verisign.iot.discovery.cli.util.DisplayUtil;
 import com.verisign.iot.discovery.cli.util.OptionUtil;
 import com.verisign.iot.discovery.commons.StatusCode;
+import com.verisign.iot.discovery.domain.CompoundLabel;
 import com.verisign.iot.discovery.domain.Fqdn;
 import com.verisign.iot.discovery.domain.ServiceInstance;
 import com.verisign.iot.discovery.exceptions.DnsServiceException;
@@ -28,7 +29,7 @@ public class ListServiceInstanceCommand extends DnsSdAbstractCommand
 {
 
 	private Fqdn domain;
-	private String serviceType;
+	private CompoundLabel serviceType;
 
 
 	@Override
@@ -37,7 +38,20 @@ public class ListServiceInstanceCommand extends DnsSdAbstractCommand
 		super.initialize( optionSet );
 
 		String domainStr = OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true );
-        this.serviceType = OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true);
+        String label = OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true);
+
+        String[] parts = null;
+        try {
+            if(CompoundLabel.isCompound(label)) {
+                parts = CompoundLabel.labelComponents(label);
+                this.serviceType = new CompoundLabel(parts[0], parts[1], parts[2]);
+            } else
+                this.serviceType = new CompoundLabel(label);
+        } catch(IllegalArgumentException iae) {
+            throw new ExecutionException(DisplayUtil.INVALID_ARGUMENT +iae.getMessage(),
+                                         ExitCodes.INVALID_ARGS.getExitCode());
+        }
+
         try {
             this.domain = new Fqdn(domainStr);
         } catch(IllegalArgumentException iae) {
