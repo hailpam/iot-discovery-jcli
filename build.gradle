@@ -6,7 +6,12 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-version = '1.0'
+if (hasProperty("teamcity")) {
+  version = '1.0.' + teamcity["build.number"]
+  jar.baseName = "iot-discovery-jcli"
+} else {
+  version = '1.0'
+}
 
 repositories {
     mavenLocal()
@@ -26,7 +31,7 @@ task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'IoT Discovery Java',
                 'Implementation-Version': version,
-                'Main-Class': 'com.verisign.iot.discovery.cli.Launcher'
+                'Main-Class': 'org.eclipse.iot.tiaki.cli.Launcher'
     }
     baseName = "iot-discovery-jcli"
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
