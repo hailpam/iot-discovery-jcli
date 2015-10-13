@@ -28,7 +28,6 @@ public class Launcher
 
 	public static void main ( String[] args )
     {
-
 		ConsoleWriter consoleWriter = new DefaultConsoleWriter();
 		CommandOptionParser parser = new DefaultOptionParser();
 		try {

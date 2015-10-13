@@ -9,19 +9,21 @@
 
 package org.eclipse.iot.tiaki.cli.command;
 
+import java.util.Set;
+import joptsimple.OptionSet;
 import org.eclipse.iot.tiaki.cli.ConsoleWriter;
+import org.eclipse.iot.tiaki.cli.common.ExitCodes;
 import org.eclipse.iot.tiaki.cli.exception.ExecutionException;
 import org.eclipse.iot.tiaki.cli.exception.OptionsNotValidException;
 import org.eclipse.iot.tiaki.cli.parser.Options;
 import org.eclipse.iot.tiaki.cli.util.DisplayUtil;
 import org.eclipse.iot.tiaki.cli.util.OptionUtil;
 import org.eclipse.iot.tiaki.domain.CertRecord;
+import org.eclipse.iot.tiaki.domain.CompoundLabel;
+import org.eclipse.iot.tiaki.domain.DnsCertPrefix;
 import org.eclipse.iot.tiaki.domain.Fqdn;
-import org.eclipse.iot.tiaki.domain.TLSAPrefix;
 import org.eclipse.iot.tiaki.exceptions.DnsServiceException;
 import org.eclipse.iot.tiaki.exceptions.LookupException;
-import java.util.Set;
-import joptsimple.OptionSet;
 
 /**
  * This class defines the listing TLSA certficates command.
@@ -31,17 +33,22 @@ public class TLSARecordsCommand extends DnsSdAbstractCommand
 {
 
 	private Fqdn domain;
-	private TLSAPrefix tlsaPrefix;
+    private String label;
+	private DnsCertPrefix tlsaPrefix;
 
 
 	@Override
 	public void initialize ( OptionSet optionSet ) throws ExecutionException, OptionsNotValidException
     {
 		super.initialize( optionSet );
-        this.domain = new Fqdn(OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true),
+        this.label = OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true);
+        if(CompoundLabel.isCompound(label))
+            throw new ExecutionException(DisplayUtil.INVALID_ARGUMENT +": compound label in input",
+                                         ExitCodes.INVALID_ARGS.getExitCode());
+        this.domain = new Fqdn(this.label,
                                OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true ));
 
-		this.tlsaPrefix = new TLSAPrefix( OptionUtil.getOptionValue( optionSet, Options.TLSA_RECORD, false ) );
+		this.tlsaPrefix = new DnsCertPrefix( OptionUtil.getOptionValue( optionSet, Options.TLSA_RECORD, false ) );
     }
 
 
