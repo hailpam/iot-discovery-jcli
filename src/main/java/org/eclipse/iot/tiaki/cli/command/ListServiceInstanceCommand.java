@@ -51,8 +51,8 @@ public class ListServiceInstanceCommand extends DnsSdAbstractCommand
             } else
                 this.serviceType = new CompoundLabel(label);
         } catch(IllegalArgumentException iae) {
-            throw new ExecutionException(DisplayUtil.INVALID_ARGUMENT +iae.getMessage(),
-                                         ExitCodes.INVALID_ARGS.getExitCode());
+            throw new OptionsNotValidException(String.format("%s: %s",
+                                DisplayUtil.INVALID_ARGUMENT, iae.getMessage()));
         }
 
         try {
