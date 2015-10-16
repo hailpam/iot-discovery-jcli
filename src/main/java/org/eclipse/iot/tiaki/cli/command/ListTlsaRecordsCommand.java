@@ -12,7 +12,6 @@ package org.eclipse.iot.tiaki.cli.command;
 import java.util.Set;
 import joptsimple.OptionSet;
 import org.eclipse.iot.tiaki.cli.ConsoleWriter;
-import org.eclipse.iot.tiaki.cli.common.ExitCodes;
 import org.eclipse.iot.tiaki.cli.exception.ExecutionException;
 import org.eclipse.iot.tiaki.cli.exception.OptionsNotValidException;
 import org.eclipse.iot.tiaki.cli.parser.Options;
@@ -29,7 +28,7 @@ import org.eclipse.iot.tiaki.exceptions.LookupException;
  * This class defines the listing TLSA certficates command.
  *
  */
-public class TLSARecordsCommand extends DnsSdAbstractCommand
+public class ListTlsaRecordsCommand extends DnsSdAbstractCommand
 {
 
 	private Fqdn domain;
@@ -43,8 +42,7 @@ public class TLSARecordsCommand extends DnsSdAbstractCommand
 		super.initialize( optionSet );
         this.label = OptionUtil.getOptionValue(optionSet, Options.SUPPLEMENT, true);
         if(CompoundLabel.isCompound(label))
-            throw new ExecutionException(DisplayUtil.INVALID_ARGUMENT +": compound label in input",
-                                         ExitCodes.INVALID_ARGS.getExitCode());
+            throw new OptionsNotValidException(String.format("%s: %s", DisplayUtil.INVALID_ARGUMENT, "unexpected 'Compound Label' in input"));
         this.domain = new Fqdn(this.label,
                                OptionUtil.getOptionValue( optionSet, Options.DOMAIN, true ));
 

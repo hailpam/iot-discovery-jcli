@@ -9,15 +9,15 @@
 
 package org.eclipse.iot.tiaki.cli;
 
+import joptsimple.OptionSet;
 import org.eclipse.iot.tiaki.cli.common.ExitCodes;
 import org.eclipse.iot.tiaki.cli.console.DefaultConsoleWriter;
-import org.eclipse.iot.tiaki.cli.exception.*;
+import org.eclipse.iot.tiaki.cli.exception.CommandNotFoundException;
 import org.eclipse.iot.tiaki.cli.exception.ExecutionException;
-import org.eclipse.iot.tiaki.cli.parser.DefaultOptionParser;
-import org.eclipse.iot.tiaki.cli.parser.Options;
-import joptsimple.OptionSet;
 import org.eclipse.iot.tiaki.cli.exception.OptionsNotValidException;
 import org.eclipse.iot.tiaki.cli.exception.ParsingException;
+import org.eclipse.iot.tiaki.cli.parser.DefaultOptionParser;
+import org.eclipse.iot.tiaki.cli.parser.Options;
 
 /**
  * Launcher application. This class contains the main method to start up the
@@ -54,7 +54,7 @@ public class Launcher
 			System.exit( ExitCodes.INVALID_ARGS.getExitCode() );
 		}
 		catch ( OptionsNotValidException e ) {
-			consoleWriter.error("ERROR: invalid command arguments: " + e.getMessage());
+			consoleWriter.error("ERROR: Invalid command arguments: " + e.getMessage());
 			consoleWriter.error(Options.getUsage());
 			System.exit( ExitCodes.INVALID_ARGS.getExitCode() );
 		}

@@ -14,7 +14,7 @@ import org.eclipse.iot.tiaki.cli.command.ListServiceInstanceCommand;
 import org.eclipse.iot.tiaki.cli.command.ListServiceTypesCommand;
 import org.eclipse.iot.tiaki.cli.command.ListTextRecordCommand;
 import org.eclipse.iot.tiaki.cli.command.ShowHelpCommand;
-import org.eclipse.iot.tiaki.cli.command.TLSARecordsCommand;
+import org.eclipse.iot.tiaki.cli.command.ListTlsaRecordsCommand;
 import org.eclipse.iot.tiaki.cli.exception.CommandNotFoundException;
 import org.eclipse.iot.tiaki.cli.exception.OptionsNotValidException;
 import org.eclipse.iot.tiaki.cli.parser.Options;
@@ -97,7 +97,7 @@ public class CommandFactory {
 			return new CheckDnsSecCommand();
 		}
 		else if ( Options.TLSA_RECORD.equals( commandOption ) ) {
-			return new TLSARecordsCommand();
+			return new ListTlsaRecordsCommand();
 		}
 		else if ( Options.HELP.equals( commandOption ) ) {
 			return new ShowHelpCommand();
