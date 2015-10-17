@@ -63,7 +63,7 @@ public class ListTlsaRecordsCommand extends DnsSdAbstractCommand
                                         String.format(DisplayUtil.map(le.dnsError()), domain.fqdn()), true);
         }
         for(CertRecord record: records){
-			consoleWriter.log( record.toDisplay() );
+			consoleWriter.log( record.toString() );
 		}
 	}
 
