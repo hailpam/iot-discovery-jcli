@@ -22,7 +22,8 @@ then
 fi
 
 # Tools
-JCLI="java -jar $DEV_HOME/$PATH_TO_JAVA/build/libs/iot-discovery-jcli-1.0.jar"
+export TIAKI_CLI_HOME="$DEV_HOME/$PATH_TO_JAVA/build/libs"
+JCLI="$DEV_HOME/$PATH_TO_JAVA/bin/sd-lookup"
 
 # Functions
 function help {
