@@ -43,7 +43,7 @@ Options:
 
 ## Examples of Use
 ####List all service types from dns-sd.org
-Please note, the "-e" is required here as dns-sd.org is not secured with DNSSEC.
+By default, Tiaki performs DNSSEC validation. If the domain name is not DNSSEC-enabled (eg. dns-sd.org), the -e (insecure) option should be used.
 ```
 $ cd $PROJECT_HOME
 $ java -jar ./build/libs/iot-discovery-jcli-1.0.jar -d dns-sd.org -e
@@ -66,13 +66,13 @@ $ java -jar iot-discovery-jcli-1.0.jar -d dns-sd.org -i -s ftp -e
 ```
 The output shows a service description ("apple quicktime files"), followed by the url, protocol and port (ftp.apple.com TCP:21), and additional information (stored in a TXT record).
 
-####Use a specific resolver 
+####Secure Discovery with DNSSEC-enabled domain name
+In the following example, the iotverisign.com domain name is DNSSEC-enabled. In order for Tiaki to perform the security checks, it needs to use a DNSSEC-enabled resolver. If the default resolver is not DNSSEC-enabled, the -n option can be used to specify the ip address of a validating resolver.
 ```
 $ java -jar iot-discovery-jcli-1.0.jar -d mcn366rzmd2a.1.iotverisign.com -l -n 64.6.64.6
 coap
 mqtt
 ```
-The '-n' can be used to specify which DNS resolver should be used. This is useful to choose a DNSSEC-enabled resolver, when the default resolver is not.
 
 # License
 Eclipse Public License - v 1.0
