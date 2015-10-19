@@ -40,8 +40,8 @@ Options:
 ```
 
 NOTE In order to use the binary executable 'sd-lookup', follow these steps:
-1. export the 'TIAKI_CLI_HOME': pointing to the JAR location, under '$PROJECT_HOME/build/libs',
-2. add the 'bin/' directory to your syste 'PATH': update the environment pointing to '$PROJECT_HOME/bin'.
+* export the 'TIAKI_CLI_HOME': pointing to the JAR location, under '$PROJECT_HOME/build/libs',
+* add the 'bin/' directory to your syste 'PATH': update the environment pointing to '$PROJECT_HOME/bin'.
 
 ### Alternative Usage
 In case you would like to use directly the JAR:
@@ -76,18 +76,27 @@ Options:
 
 obtaining the same help screen. From there, you can start typing your commands and discovering your services.
 
-## Example of Use
-```
-cd $PROJECT_HOME
-java -jar ./build/libs/iot-discovery-jcli-1.0.jar -d mcn366rzmd2a.1.iotverisign.com -i -s mqtt
+## Examples of Use
 
-mqtt austriamqtt.example.com:1882 60 "qos=1"
-mqtt zambiamqtt.example.com:1882 60 "qos=1"
-mqtt indiamqtt.example.com:1884 60 "qos=2"
-mqtt norwaymqtt.example.com:1884 60 "qos=3"
-mqtt ukmqtt.example.com:1884 60 "qos=1"
-mqtt germanmqtt.example.com:1882 60 "qos=2"
+Either:
+
 ```
+[pmaresca@localhost bin]$ ./sd-lookup -d dns-sd.org -i -s ftp -e
+60 "apple quicktime files" ftp.apple.com TCP:21 "txtvers=1" "path=/quicktime"
+60 "microsoft developer files" ftp.microsoft.com TCP:21 "txtvers=1" "path=/developer"
+59 "restricted, registered users only" pretend-server.dns-sd.org TCP:21 "txtvers=1" "path=/"
+```
+
+Or:
+
+```
+cd $PROJECT_HOME/build/libs
+[pmaresca@localhost libs]$ java -jar iot-discovery-jcli-1.0.jar -d dns-sd.org -i -s ftp -e
+60 "apple quicktime files" ftp.apple.com TCP:21 "txtvers=1" "path=/quicktime"
+60 "microsoft developer files" ftp.microsoft.com TCP:21 "txtvers=1" "path=/developer"
+59 "restricted, registered users only" pretend-server.dns-sd.org TCP:21 "txtvers=1" "path=/"
+```
+
 
 # License
 Eclipse Public License - v 1.0
