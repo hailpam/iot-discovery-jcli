@@ -72,7 +72,7 @@ public final class Options
         sb.append(String.format("  %-40s\t%-40s", "-" + DNS_SEC_STATUS_S + " [domain], --" + DNS_SEC_STATUS +" [domain]",
                                 "Check the DNSSEC status of 'domain'; if not specified, check against the default one.")).append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + TLSA_RECORD_S +" [port:protocol], --" + TLSA_RECORD +" [port:protocol]",
-                                "Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s (only wit required 'label') are required.")).append("\n");
+                                "Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s (only with required 'label') are required.")).append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + TEXT_RECORD_S + " <label>, --" + TEXT_RECORD +" <label>",
                                     "Display the text records having 'label'; -d is required.")).append("\n");
 
