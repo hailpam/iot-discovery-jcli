@@ -14,16 +14,16 @@ The command line tool makes use of the Verisign' Discovery Services APIs (https:
 This is a Gradle project, so pretty intuitive to build up. Hereafter a simple example on how to get started in building it.
 
 ```
-cd $PROJECT_HOME
-gradle clean fatJar
+$ cd $PROJECT_HOME
+$ gradle clean fatJar
 ```
 
 ## Usage
 ```
-cd $PROJECT_HOME
-java -jar build/libs/iot-discovery-jcli-1.0.jar
+$cd $PROJECT_HOME
+$ java -jar build/libs/iot-discovery-jcli-1.0.jar
 
-[pmaresca@localhost tools]$ jcli -h
+$ jcli -h
 Usage: java -jar iot-discovery-jcli-1.0.jar [<command>[<arg>]] [options]
 Commands:
   -h, --help                              	Display this usage and quit.            
@@ -41,18 +41,38 @@ Options:
   -s <label>, --supplement <label>        	Specify a supplementary 'label' to concatenate/use to query for; the 'label' has to follow the pattern: 'label[:sublabel:proto>|:proto]', e.g. 'http:printer:tcp', or only 'http', or 'http:tcp'.
 ```
 
-## Example of Use
+## Examples of Use
+####List all service types from dns-sd.org
+Please note, the "-e" is required here as dns-sd.org is not secured with DNSSEC.
 ```
-cd $PROJECT_HOME
-java -jar ./build/libs/iot-discovery-jcli-1.0.jar -d mcn366rzmd2a.1.iotverisign.com -i -s mqtt
+$ cd $PROJECT_HOME
+$ java -jar ./build/libs/iot-discovery-jcli-1.0.jar -d dns-sd.org -e
+afpovertcp
+ftp
+http
+ipp
+pdl-datastream
+printer
+ssh
+```
 
-mqtt austriamqtt.example.com:1882 60 "qos=1"
-mqtt zambiamqtt.example.com:1882 60 "qos=1"
-mqtt indiamqtt.example.com:1884 60 "qos=2"
-mqtt norwaymqtt.example.com:1884 60 "qos=3"
-mqtt ukmqtt.example.com:1884 60 "qos=1"
-mqtt germanmqtt.example.com:1882 60 "qos=2"
+
+####List all service instances of type 'ftp'
 ```
+$ java -jar iot-discovery-jcli-1.0.jar -d dns-sd.org -i -s ftp -e
+"apple quicktime files" ftp.apple.com TCP:21 "txtvers=1" "path=/quicktime"
+"microsoft developer files" ftp.microsoft.com TCP:21 "txtvers=1" "path=/developer"
+"restricted, registered users only" pretend-server.dns-sd.org TCP:21 "txtvers=1" "path=/"
+```
+The output shows a service description ("apple quicktime files"), followed by the url, protocol and port (ftp.apple.com TCP:21), and additional information (stored in a TXT record).
+
+####Use a specific resolver 
+```
+$ java -jar iot-discovery-jcli-1.0.jar -d mcn366rzmd2a.1.iotverisign.com -l -n 64.6.64.6
+coap
+mqtt
+```
+The '-n' can be used to specify which DNS resolver should be used. This is useful to choose a DNSSEC-enabled resolver, when the default resolver is not.
 
 # License
 Eclipse Public License - v 1.0
