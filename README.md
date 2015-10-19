@@ -20,17 +20,14 @@ gradle clean fatJar
 
 ## Usage
 ```
-cd $PROJECT_HOME
-java -jar build/libs/iot-discovery-jcli-1.0.jar
-
-[pmaresca@localhost tools]$ jcli -h
-Usage: java -jar iot-discovery-jcli-1.0.jar [<command>[<arg>]] [options]
+[pmaresca@localhost tools]$ sd-lookup -h
+Usage: sd-lookup [<command>[<arg>]] [options]
 Commands:
-  -h, --help                              	Display this usage and quit.            
+  -h, --help                              	Display this usage and quit.
   -i, --list-instances                    	Detailed display of service instances; -s and -d are required.
   -l, --list-services                     	Display the service types; -d is required.
   -c [domain], --dnssec-status [domain]   	Check the DNSSEC status of 'domain'; if not specified, check against the default one.
-  -x [port:protocol], --tlsa [port:protocol]	Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s (which has only the required 'label') are required.
+  -x [port:protocol], --tlsa [port:protocol]	Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s (only with required 'label') are required.
   -t <label>, --text-record <label>       	Display the text records having 'label'; -d is required.
 Options:
   -e, --insecure                          	Inhibit the DNSSEC validation upon lookup.
@@ -39,7 +36,45 @@ Options:
   -u <filename>, --trust-anchor <filename>	Specify the file containing the trust anchor.
   -d <domain>, --domain <domain>          	Specify the domain name to use upon resolution process.
   -s <label>, --supplement <label>        	Specify a supplementary 'label' to concatenate/use to query for; the 'label' has to follow the pattern: 'label[:sublabel:proto>|:proto]', e.g. 'http:printer:tcp', or only 'http', or 'http:tcp'.
+
 ```
+
+NOTE In order to use the binary executable 'sd-lookup', follow these steps:
+1. export the 'TIAKI_CLI_HOME': pointing to the JAR location, under '$PROJECT_HOME/build/libs',
+2. add the 'bin/' directory to your syste 'PATH': update the environment pointing to '$PROJECT_HOME/bin'.
+
+### Alternative Usage
+In case you would like to use directly the JAR:
+
+```
+cd $PROJECT_HOME
+gradle clean fatJar
+cd build/libs
+```
+
+and, then
+
+```
+[pmaresca@localhost libs]$ java -jar iot-discovery-jcli -h
+Usage: sd-lookup [<command>[<arg>]] [options]
+Commands:
+  -h, --help                              	Display this usage and quit.
+  -i, --list-instances                    	Detailed display of service instances; -s and -d are required.
+  -l, --list-services                     	Display the service types; -d is required.
+  -c [domain], --dnssec-status [domain]   	Check the DNSSEC status of 'domain'; if not specified, check against the default one.
+  -x [port:protocol], --tlsa [port:protocol]	Display the TLSA records referring to the couple 'port:protocol' (default ones if not specified); -d and -s (only with required 'label') are required.
+  -t <label>, --text-record <label>       	Display the text records having 'label'; -d is required.
+Options:
+  -e, --insecure                          	Inhibit the DNSSEC validation upon lookup.
+  -v, --verbose                           	Display a verbose output of the resolution.
+  -n <resolvers>, --servers <resolvers>   	Comma-separated list of resolver servers, overriding the default ones.
+  -u <filename>, --trust-anchor <filename>	Specify the file containing the trust anchor.
+  -d <domain>, --domain <domain>          	Specify the domain name to use upon resolution process.
+  -s <label>, --supplement <label>        	Specify a supplementary 'label' to concatenate/use to query for; the 'label' has to follow the pattern: 'label[:sublabel:proto>|:proto]', e.g. 'http:printer:tcp', or only 'http', or 'http:tcp'.
+
+```
+
+obtaining the same help screen. From there, you can start typing your commands and discovering your services.
 
 ## Example of Use
 ```

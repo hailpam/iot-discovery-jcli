@@ -61,7 +61,7 @@ public final class Options
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Usage: java -jar iot-discovery-jcli-1.0.jar [<command>[<arg>]] [options]").append("\n");
+        sb.append("Usage: sd-lookup [<command>[<arg>]] [options]").append("\n");
 
         sb.append("Commands:").append("\n");
         sb.append(String.format("  %-40s\t%-40s", "-" + HELP_S + ", --" + HELP, "Display this usage and quit.")).append("\n");
