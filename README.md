@@ -14,8 +14,8 @@ The command line tool makes use of the Verisign' Discovery Services APIs (https:
 This is a Gradle project, so pretty intuitive to build up. Hereafter a simple example on how to get started in building it.
 
 ```
-cd $PROJECT_HOME
-gradle clean fatJar
+$ cd $PROJECT_HOME
+$ gradle clean fatJar
 ```
 
 ## Usage
@@ -78,7 +78,38 @@ obtaining the same help screen. From there, you can start typing your commands a
 
 ## Examples of Use
 
-Either:
+### Listing Service Types from 'dns-sd.org'
+
+Either using the binary script:
+
+```
+[pmaresca@localhost bin]$ ./sd-lookup -d dns-sd.org -l -e
+afpovertcp
+ftp
+http
+ipp
+pdl-datastream
+printer
+ssh
+```
+
+or using the fat Jar:
+
+```
+cd $PROJECT_HOME/build/libs
+[pmaresca@localhost libs]$ java -jar iot-discovery-jcli-1.0.jar -d dns-sd.org -l -e
+afpovertcp
+ftp
+http
+ipp
+pdl-datastream
+printer
+ssh
+```
+
+### Listing Service Instance of type 'ftp'
+
+Either using the binary script:
 
 ```
 [pmaresca@localhost bin]$ ./sd-lookup -d dns-sd.org -i -s ftp -e
@@ -87,7 +118,7 @@ Either:
 59 "restricted, registered users only" pretend-server.dns-sd.org TCP:21 "txtvers=1" "path=/"
 ```
 
-Or:
+or using the fat Jar:
 
 ```
 cd $PROJECT_HOME/build/libs
@@ -95,7 +126,6 @@ cd $PROJECT_HOME/build/libs
 60 "apple quicktime files" ftp.apple.com TCP:21 "txtvers=1" "path=/quicktime"
 60 "microsoft developer files" ftp.microsoft.com TCP:21 "txtvers=1" "path=/developer"
 59 "restricted, registered users only" pretend-server.dns-sd.org TCP:21 "txtvers=1" "path=/"
-```
 
 
 # License
